@@ -261,21 +261,23 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   var WHATSAPP_NUMBER = '';          /* your whatsapp number, e.g. '919876543210' */
   var LEAD_TIME = '5 to 7 days';
   var PRICES = {
-    base: { aline: 1699, anarkali: 2499, sundress: 1899, lehenga: 2899 },
+    base: { aline: 1699, anarkali: 2499, sundress: 1899, lehenga: 2899, kurti: 1299 },
     material: { cotton: 0, georgette: 450, silk: 850, organza: 650 },
     pattern: { solid: 0, floral: 200, polka: 150, booti: 250 },
-    extra: { pocket: 100, belt: 150, ruffleHem: 200 }
+    extra: { pocket: 100, belt: 150, ruffleHem: 200, gotaSlits: 150 }
   };
 
   /* Pretty Dresses & Silhouettes for Girls */
   var GARMENTS = [
     ['aline', 'A-Line Flare Dress'],
+    ['kurti', 'Designer Ethnic Kurti'],
     ['sundress', 'Tiered Midi Sundress'],
     ['anarkali', 'Anarkali Twirl Gown'],
     ['lehenga', 'Crop Top & Flared Skirt']
   ];
   var GNAME = {
     aline: 'A-Line Flare Dress',
+    kurti: 'Designer Ethnic Kurti',
     sundress: 'Tiered Midi Sundress',
     anarkali: 'Anarkali Twirl Gown',
     lehenga: 'Crop Top & Flared Skirt'
@@ -320,6 +322,14 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       { k: 'waistDetail', label: 'Waist Styling', def: 'bow', ch: [['none', 'Clean Plain'], ['bow', 'Tie-up Bow Sash'], ['belt', 'Fabric Belt']] },
       { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pockets (+₹100)']] }
     ],
+    kurti: [
+      { k: 'silhouette', label: 'Kurti Style', def: 'straight', ch: [['straight', 'Straight Cut (Classic Slits)'], ['nyra', 'Nyra Cut (High Slits & Gathers)'], ['peplum', 'Short Peplum Tunic'], ['aline', 'A-Line Flared Kurti']] },
+      { k: 'neck', label: 'Neckline', def: 'mandarin', ch: [['mandarin', 'Mandarin Collar & V-Slit'], ['angrakha', 'Angrakha Overlap & Dori Tie'], ['keyhole', 'Keyhole with Potli Button'], ['sweetheart', 'Sweetheart with Gota'], ['round', 'Round Neck & Slit']] },
+      { k: 'sleeve', label: 'Sleeve Style', def: 'threeFourth', ch: [['threeFourth', '3/4th with Lace Border'], ['bell', 'Flared Bell Sleeves'], ['puff', 'Puff Sleeves with Cuff'], ['sleeveless', 'Sleeveless with Piping'], ['full', 'Full Churidar Sleeves']] },
+      { k: 'length', label: 'Kurti Length', def: 'knee', ch: [['short', 'Hip Length (Short 32")'], ['knee', 'Knee Length (40")'], ['calf', 'Calf Long Kurti (45")']] },
+      { k: 'slits', label: 'Slit Detailing', def: 'gota', ch: [['gota', 'Slits with Gota Patti Trim (+₹150)'], ['plain', 'Clean Plain Slits'], ['frontSlit', 'Center Front Slit']] },
+      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pocket (+₹100)']] }
+    ],
     sundress: [
       { k: 'neck', label: 'Neckline', def: 'square', ch: [['square', 'Square Cut'], ['sweetheart', 'Sweetheart'], ['vneck', 'Soft V-Neck'], ['round', 'Round Neck']] },
       { k: 'sleeve', label: 'Sleeves', def: 'flutter', ch: [['flutter', 'Ruffle / Flutter'], ['puff', 'Puff Sleeves'], ['sleeveless', 'Spaghetti Straps'], ['cap', 'Cap Sleeves']] },
@@ -354,6 +364,15 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       ['shoulder', 'Shoulder Width', 'Across back, bone tip to bone tip', 12, 19, [0, 0.25, 0.5]],
       ['sleeve', 'Sleeve Length', 'Shoulder bone down to desired length', 5, 25, [0.5, 0.5, 0.75]],
       ['dressLength', 'Dress Length', 'Shoulder down to desired hem', 30, 52, [0, 0, 0]]
+    ],
+    kurti: [
+      ['bust', 'Bust / Chest', 'Around fullest part of the bust', 28, 48, [2, 3, 4]],
+      ['waist', 'Waist', 'Around natural waist (above navel)', 22, 44, [2, 3, 4]],
+      ['hip', 'Hip / Slit Level', 'Fullest part of hips where side slits open', 28, 54, [3, 4.5, 6]],
+      ['shoulder', 'Shoulder Width', 'Across back, bone tip to bone tip', 12, 19, [0, 0.25, 0.5]],
+      ['sleeve', 'Sleeve Length', 'Shoulder bone down to desired sleeve length', 5, 25, [0.5, 0.5, 0.75]],
+      ['slitStart', 'Slit Opening Point', 'Shoulder down to where side slit opens (19-23")', 17, 26, [0, 0, 0]],
+      ['kurtiLength', 'Kurti Full Length', 'Shoulder down to desired hemline', 28, 50, [0, 0, 0]]
     ],
     sundress: [
       ['bust', 'Bust / Chest', 'Around fullest part of the bust', 28, 48, [1.5, 2.5, 4]],
@@ -423,6 +442,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     if (o.pocket === 'yes') p += PRICES.extra.pocket;
     if (o.waistDetail === 'bow' || o.waistDetail === 'belt') p += PRICES.extra.belt;
     if (o.hemDetail === 'ruffleHem') p += PRICES.extra.ruffleHem;
+    if (o.slits === 'gota') p += (PRICES.extra.gotaSlits || 150);
     return p;
   }
 
@@ -471,12 +491,23 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
 
     // Dress Silhouette Geometry
     var waistY = c.g === 'lehenga' ? 142 : 160;
-    var skirtHemY = c.g === 'anarkali' ? 405 : (c.g === 'lehenga' ? 408 : (o.length === 'mini' ? 310 : (o.length === 'midi' ? 385 : 345)));
-    var skirtWidth = c.g === 'anarkali' ? 138 : (c.g === 'lehenga' ? 135 : (c.g === 'sundress' ? 122 : (c.fit === 'relaxed' ? 120 : 108)));
+    var kurtiLen = o.length === 'short' ? 315 : (o.length === 'calf' ? 395 : 360);
+    var skirtHemY = c.g === 'kurti' ? kurtiLen : (c.g === 'anarkali' ? 405 : (c.g === 'lehenga' ? 408 : (o.length === 'mini' ? 310 : (o.length === 'midi' ? 385 : 345))));
+    var skirtWidth = c.g === 'anarkali' ? 138 : (c.g === 'lehenga' ? 135 : (c.g === 'sundress' ? 122 : (c.g === 'kurti' ? (o.silhouette === 'aline' ? 95 : (o.silhouette === 'peplum' ? 85 : 55)) : (c.fit === 'relaxed' ? 120 : 108))));
 
     // 1. SLEEVES RENDERING
-    var sleeve = o.sleeve || 'puff';
-    if (sleeve === 'puff') {
+    var sleeve = o.sleeve || (c.g === 'kurti' ? 'threeFourth' : 'puff');
+    if (sleeve === 'threeFourth') {
+      // 3/4th Sleeve with Lace / Gota Hem
+      var tfSleeve = 'M106 72 Q78 85 68 145 Q62 195 72 210 L88 210 Q90 160 98 115 Z';
+      s += pair(tfSleeve);
+      s += pair(goldTrim('M72 208 L88 208'));
+    } else if (sleeve === 'bell') {
+      // Flared Bell Sleeve
+      var bellSleeve = 'M106 72 Q78 85 70 145 L48 210 Q70 220 92 210 L82 145 Q88 120 98 110 Z';
+      s += pair(bellSleeve);
+      s += pair(goldTrim('M48 210 Q70 220 92 210'));
+    } else if (sleeve === 'puff') {
       // Romantic Princess Puff Sleeve
       var puff = 'M106 72 Q72 65 65 98 Q60 128 88 126 L98 108 Z';
       s += pair(puff);
@@ -498,8 +529,45 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     }
     // (if sleeveless, shoulder straps are drawn with the bodice)
 
-    // 2. SKIRT RENDERING (Lower Portion)
-    if (c.g === 'lehenga') {
+    // 2. SKIRT & LOWER PORTION RENDERING
+    if (c.g === 'kurti') {
+      var kStyle = o.silhouette || 'straight';
+      var slitStartY = (kStyle === 'nyra') ? 148 : 220; // Nyra starts high at empire line
+      if (kStyle === 'peplum') {
+        // Short Peplum Flare
+        var peplumHem = 270;
+        s += part('M114 ' + waistY + ' L186 ' + waistY + ' Q215 210 230 ' + peplumHem + ' Q150 ' + (peplumHem + 12) + ' 70 ' + peplumHem + ' Q85 210 114 ' + waistY + ' Z');
+        s += goldTrim('M72 ' + (peplumHem - 4) + ' Q150 ' + (peplumHem + 8) + ' 228 ' + (peplumHem - 4));
+      } else if (kStyle === 'nyra') {
+        // Nyra Cut with gathers & high side slits
+        s += part('M114 ' + waistY + ' L186 ' + waistY + ' L192 ' + skirtHemY + ' L108 ' + skirtHemY + ' Z');
+        // Underbust gather pleats
+        [-30, -20, -10, 0, 10, 20, 30].forEach(function(gx) {
+          s += line('M' + (150 + gx) + ' ' + (waistY - 8) + ' L' + (150 + gx * 1.1) + ' ' + (waistY + 18), 1.2, col.gold);
+        });
+        // High side slits with gota trim
+        s += goldTrim('M108 ' + slitStartY + ' L108 ' + skirtHemY);
+        s += goldTrim('M192 ' + slitStartY + ' L192 ' + skirtHemY);
+        s += goldTrim('M108 ' + skirtHemY + ' L192 ' + skirtHemY);
+      } else if (kStyle === 'aline') {
+        // A-Line Flare Kurti
+        s += part('M114 ' + waistY + ' L186 ' + waistY + ' Q205 240 ' + (150 + skirtWidth) + ' ' + skirtHemY + ' L' + (150 - skirtWidth) + ' ' + skirtHemY + ' Q95 240 114 ' + waistY + ' Z');
+        if (o.slits === 'gota') {
+          s += goldTrim('M' + (150 - skirtWidth) + ' ' + slitStartY + ' L' + (150 - skirtWidth) + ' ' + skirtHemY);
+          s += goldTrim('M' + (150 + skirtWidth) + ' ' + slitStartY + ' L' + (150 + skirtWidth) + ' ' + skirtHemY);
+        }
+      } else {
+        // Classic Straight Kurti with Side Slits
+        s += part('M114 ' + waistY + ' L186 ' + waistY + ' L188 ' + slitStartY + ' L188 ' + skirtHemY + ' L112 ' + skirtHemY + ' L112 ' + slitStartY + ' Z');
+        if (o.slits === 'gota') {
+          s += goldTrim('M112 ' + slitStartY + ' L112 ' + skirtHemY);
+          s += goldTrim('M188 ' + slitStartY + ' L188 ' + skirtHemY);
+          s += goldTrim('M112 ' + skirtHemY + ' L188 ' + skirtHemY);
+        } else if (o.slits === 'frontSlit') {
+          s += line('M150 ' + slitStartY + ' L150 ' + skirtHemY, 2, col.gold);
+        }
+      }
+    } else if (c.g === 'lehenga') {
       // Flared Lehenga Skirt (separate from crop top)
       var skirtTopY = 175;
       s += part('M114 ' + skirtTopY + ' L186 ' + skirtTopY + ' Q240 270 ' + (150 + skirtWidth) + ' ' + skirtHemY + ' Q150 ' + (skirtHemY + 16) + ' ' + (150 - skirtWidth) + ' ' + skirtHemY + ' Q60 270 114 ' + skirtTopY + ' Z');
@@ -560,7 +628,35 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     }
 
     // 4. NECKLINE CUTOUTS
-    if (neck === 'sweetheart') {
+    if (c.g === 'kurti') {
+      if (neck === 'mandarin') {
+        // Mandarin Stand Collar with V-Slit & Potli Buttons
+        s += '<path d="M124 ' + (topY - 4) + ' Q150 ' + (topY + 6) + ' 176 ' + (topY - 4) + ' L176 ' + (topY - 14) + ' Q150 ' + (topY - 4) + ' 124 ' + (topY - 14) + ' Z" fill="' + c.hex + '" stroke="' + col.stroke + '" stroke-width="1.6"/>';
+        s += '<path d="M142 ' + topY + ' L150 ' + (topY + 28) + ' L158 ' + topY + '" fill="var(--bg)" stroke="' + col.stroke + '" stroke-width="1.6"/>';
+        // Front Placket with Potli Buttons
+        s += line('M150 ' + (topY + 28) + ' L150 ' + (topY + 80), 1.8, col.gold);
+        [topY + 38, topY + 52, topY + 66].forEach(function(by) {
+          s += '<circle cx="150" cy="' + by + '" r="2.8" fill="' + col.gold + '"/>';
+        });
+      } else if (neck === 'angrakha') {
+        // Angrakha Diagonal Overlap with Side Dori
+        s += '<path d="M114 ' + topY + ' L180 ' + (topY + 70) + '" fill="none" stroke="' + col.gold + '" stroke-width="2.5"/>';
+        s += '<circle cx="180" cy="' + (topY + 70) + '" r="3.5" fill="' + col.gold + '"/>';
+        s += line('M180 ' + (topY + 70) + ' Q190 ' + (topY + 80) + ' 188 ' + (topY + 102), 1.8, col.gold);
+      } else if (neck === 'keyhole') {
+        // Round Neck with Keyhole & Button
+        s += '<path d="M122 ' + topY + ' Q150 94 178 ' + topY + ' Z" fill="var(--bg)" stroke="' + col.stroke + '" stroke-width="1.6"/>';
+        s += '<ellipse cx="150" cy="' + (topY + 22) + '" rx="4" ry="7" fill="var(--bg)" stroke="' + col.gold + '" stroke-width="1.6"/>';
+        s += '<circle cx="150" cy="' + (topY + 12) + '" r="2.2" fill="' + col.gold + '"/>';
+      } else if (neck === 'sweetheart') {
+        s += '<path d="M116 ' + topY + ' Q130 92 150 102 Q170 92 184 ' + topY + ' Q150 ' + (topY - 6) + ' 116 ' + topY + ' Z" fill="var(--bg)" stroke="' + col.stroke + '" stroke-width="1.6"/>';
+        s += goldTrim('M118 ' + (topY + 2) + ' Q132 94 150 104 Q168 94 182 ' + (topY + 2));
+      } else {
+        // Round with small slit
+        s += '<path d="M122 ' + topY + ' Q150 96 178 ' + topY + ' Z" fill="var(--bg)" stroke="' + col.stroke + '" stroke-width="1.6"/>';
+        s += line('M150 92 L150 108', 1.8, col.gold);
+      }
+    } else if (neck === 'sweetheart') {
       // Romantic Sweetheart Neckline
       s += '<path d="M116 ' + topY + ' Q130 92 150 102 Q170 92 184 ' + topY + ' Q150 ' + (topY - 6) + ' 116 ' + topY + ' Z" fill="' + (c.g === 'lehenga' ? '#FFF0F5' : 'var(--bg)') + '" stroke="' + col.stroke + '" stroke-width="1.6"/>';
       s += goldTrim('M118 ' + (topY + 2) + ' Q132 94 150 104 Q168 94 182 ' + (topY + 2));
