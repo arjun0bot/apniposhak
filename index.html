@@ -1,0 +1,466 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Naap Tailor Sheet</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: yellow tape band on top, controls row, form column on the left with the tailor's sheet below it, sticky body diagram on the right. */
+:root {
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --bg: #F2F4F2;
+  --surface: #FFFFFF;
+  --fg: #17201B;
+  --muted: #56635B;
+  --line: #D5DBD6;
+  --accent: #1F3FA8;
+  --accent-fg: #FFFFFF;
+  --accent-soft: #E3E9FA;
+  --tape: #F4C430;
+  --tape-ink: #2B2300;
+  --warn: #B3261E;
+  --fig: #DCE2DD;
+  --mark: #1F3FA8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111613; --surface: #1A211C; --fg: #E7EDE8; --muted: #9BA8A0; --line: #2C362F;
+    --accent: #8EA6FF; --accent-fg: #101530; --accent-soft: #222C4D;
+    --warn: #FF9C92; --fig: #2B352E; --mark: #8EA6FF;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111613; --surface: #1A211C; --fg: #E7EDE8; --muted: #9BA8A0; --line: #2C362F;
+  --accent: #8EA6FF; --accent-fg: #101530; --accent-soft: #222C4D;
+  --warn: #FF9C92; --fig: #2B352E; --mark: #8EA6FF;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--fg);
+  font: 16px/1.5 var(--body);
+}
+*, *::before, *::after { box-sizing: border-box; }
+.tape {
+  height: 32px;
+  background:
+    repeating-linear-gradient(90deg, var(--tape-ink) 0 1px, transparent 1px 8px) bottom / 100% 7px no-repeat,
+    repeating-linear-gradient(90deg, var(--tape-ink) 0 2px, transparent 2px 48px) bottom / 100% 15px no-repeat,
+    var(--tape);
+}
+.wrap {
+  max-width: 1100px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+}
+h1 { font: 700 clamp(2.5rem, 7vw, 4rem)/1 var(--display); letter-spacing: -0.02em; margin: 0 0 10px; }
+h2 { font: 700 1.35rem/1.2 var(--display); letter-spacing: -0.01em; margin: 0 0 6px; text-wrap: balance; }
+.lede { max-width: 60ch; color: var(--muted); margin: 0 0 26px; }
+.controls { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-bottom: 8px; }
+fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+legend { padding: 0; margin-bottom: 6px; font-size: .75rem; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.seg { position: relative; display: inline-flex; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); overflow: hidden; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label { padding: 9px 15px; cursor: pointer; font-weight: 500; font-size: .95rem; color: var(--muted); border-right: 1px solid var(--line); }
+.seg label:last-of-type { border-right: 0; }
+.seg input:checked + label { background: var(--accent); color: var(--accent-fg); }
+.seg input:focus-visible + label { outline: 2px solid var(--fg); outline-offset: -4px; }
+.fitnote { color: var(--muted); font-size: .9rem; margin: 8px 0 22px; min-height: 1.4em; }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 36px; align-items: start; }
+.main { min-width: 0; }
+.helper { position: sticky; top: 16px; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.fig { width: 150px; max-width: 100%; height: auto; flex: none; }
+.fig .shape { fill: var(--fig); }
+.fig .arm { fill: none; stroke: var(--fig); stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; }
+.fig .mk { fill: none; stroke: var(--mark); stroke-width: 3.5; stroke-linecap: round; opacity: 0; transition: opacity .15s; }
+.fig .mk.on { opacity: 1; }
+.how { align-self: stretch; min-width: 0; }
+.how h2 { font-size: 1.15rem; }
+.how p { margin: 0 0 8px; font-size: .94rem; }
+.how .range { font: .8rem var(--mono); color: var(--muted); margin: 0; }
+.sample { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; background: var(--accent-soft); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; font-size: .92rem; }
+.sample[hidden] { display: none; }
+.linkbtn { font: inherit; font-weight: 600; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+.field { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 4px 16px; align-items: center; padding: 14px 12px; border-bottom: 1px solid var(--line); border-radius: 6px; }
+.field:focus-within { background: var(--accent-soft); }
+.field .name { font-weight: 600; display: block; }
+.field .hint { color: var(--muted); font-size: .86rem; }
+.inwrap { position: relative; }
+.inwrap input { width: 100%; font: 500 1.125rem var(--mono); padding: 9px 40px 9px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--fg); }
+.inwrap input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.inwrap .u { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); font: .8rem var(--mono); pointer-events: none; }
+.field.bad input { border-color: var(--warn); }
+.err { grid-column: 1 / -1; color: var(--warn); font-size: .85rem; }
+.err[hidden] { display: none; }
+#sheet { margin-top: 36px; }
+.meta { color: var(--muted); margin: 0 0 12px; font-size: .92rem; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; min-width: 340px; }
+th { text-align: left; font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+td { padding: 11px 14px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+th.n { font-family: var(--body); }
+td.final { font-weight: 600; font-size: 1.1rem; color: var(--accent); }
+.size { margin: 14px 0 4px; font-size: .94rem; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin: 14px 0; }
+.btn { font: 600 1rem var(--body); background: var(--accent); color: var(--accent-fg); border: 0; border-radius: 8px; padding: 11px 18px; cursor: pointer; }
+.btn:hover { opacity: .92; }
+.btn:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+#status { color: var(--muted); font-size: .9rem; }
+details { margin: 4px 0 14px; }
+summary { cursor: pointer; color: var(--muted); font-size: .9rem; }
+pre { font: .88rem/1.6 var(--mono); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; overflow-x: auto; white-space: pre-wrap; word-break: break-word; margin: 8px 0 0; }
+.note { color: var(--muted); font-size: .88rem; max-width: 70ch; margin: 0; }
+@media (max-width: 860px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .helper { order: -1; position: static; flex-direction: row; align-items: flex-start; padding: 14px; }
+  .fig { width: 84px; }
+}
+@media (max-width: 420px) {
+  .field { grid-template-columns: minmax(0, 1fr) 122px; gap: 4px 10px; padding-inline: 8px; }
+  .seg label { padding: 9px 11px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="tape" aria-hidden="true"></div>
+<div class="wrap">
+  <h1>Naap</h1>
+  <p class="lede">Take your body measurements once and get the finished sizes a tailor needs for a shirt, kurta or trouser. Fit and ease are added for you.</p>
+
+  <div class="controls">
+    <fieldset>
+      <legend>Garment</legend>
+      <div class="seg">
+        <input type="radio" name="g" id="g-shirt" value="shirt"><label for="g-shirt">Shirt</label>
+        <input type="radio" name="g" id="g-kurta" value="kurta"><label for="g-kurta">Kurta</label>
+        <input type="radio" name="g" id="g-trouser" value="trouser"><label for="g-trouser">Trouser</label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Fit</legend>
+      <div class="seg">
+        <input type="radio" name="fit" id="f-0" value="0"><label for="f-0">Slim</label>
+        <input type="radio" name="fit" id="f-1" value="1"><label for="f-1">Regular</label>
+        <input type="radio" name="fit" id="f-2" value="2"><label for="f-2">Relaxed</label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Units</legend>
+      <div class="seg">
+        <input type="radio" name="unit" id="u-in" value="in"><label for="u-in">Inches</label>
+        <input type="radio" name="unit" id="u-cm" value="cm"><label for="u-cm">Centimetres</label>
+      </div>
+    </fieldset>
+  </div>
+  <p class="fitnote" id="fitnote"></p>
+
+  <div class="layout">
+    <div class="main">
+      <div class="sample" id="sample">
+        <span>Sample numbers are filled in so you can see how the sheet works.</span>
+        <button class="linkbtn" id="clear" type="button">Clear and enter mine</button>
+      </div>
+      <div id="fields"></div>
+
+      <section id="sheet" aria-labelledby="sheetTitle">
+        <h2 id="sheetTitle">Tailor's sheet</h2>
+        <p class="meta" id="meta"></p>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Measurement</th><th class="n">Body</th><th class="n">Ease</th><th class="n">Stitch size</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <p class="size" id="size"></p>
+        <div class="actions">
+          <button class="btn" id="copy" type="button">Copy for WhatsApp</button>
+          <span id="status" role="status"></span>
+        </div>
+        <details id="det"><summary>Text version</summary><pre id="txt"></pre></details>
+        <p class="note">Ease is the extra room a garment needs so you can move and sit. These are typical tailor allowances, so your tailor may change them for the fabric and the cut. Measure over a thin vest or bare, stand straight, keep the tape snug but not tight, and re-check any number that looks odd. Your numbers are saved in this browser only.</p>
+      </section>
+    </div>
+
+    <aside class="helper">
+      <svg class="fig" viewBox="0 0 200 400" role="img" aria-label="Body outline showing where the selected measurement is taken">
+        <circle class="shape" cx="100" cy="30" r="18"/>
+        <rect class="shape" x="92" y="44" width="16" height="22" rx="4"/>
+        <path class="shape" d="M62 70 Q100 58 138 70 L134 150 L130 212 L70 212 L66 150 Z"/>
+        <path class="arm" d="M62 74 L40 160 L34 214"/>
+        <path class="arm" d="M138 74 L160 160 L166 214"/>
+        <rect class="shape" x="70" y="206" width="27" height="176" rx="11"/>
+        <rect class="shape" x="103" y="206" width="27" height="176" rx="11"/>
+        <line class="mk" data-k="neck" x1="86" y1="57" x2="114" y2="57"/>
+        <line class="mk" data-k="shoulder" x1="56" y1="67" x2="144" y2="67"/>
+        <line class="mk" data-k="chest" x1="60" y1="102" x2="140" y2="102"/>
+        <line class="mk" data-k="waist" x1="64" y1="150" x2="136" y2="150"/>
+        <line class="mk" data-k="hip" x1="66" y1="196" x2="134" y2="196"/>
+        <path class="mk" data-k="sleeve" d="M62 74 L40 160 L34 214"/>
+        <line class="mk" data-k="length" x1="100" y1="62" x2="100" y2="232"/>
+        <line class="mk" data-k="thigh" x1="70" y1="232" x2="97" y2="232"/>
+        <line class="mk" data-k="inseam" x1="100" y1="214" x2="100" y2="372"/>
+        <line class="mk" data-k="outseam" x1="133" y1="150" x2="128" y2="380"/>
+      </svg>
+      <div class="how">
+        <h2 id="hTitle"></h2>
+        <p id="hText"></p>
+        <p class="range" id="hRange"></p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+
+  /* ease is in inches: [slim, regular, relaxed] */
+  var SPEC = {
+    shirt: [
+      { id: 'neck', label: 'Neck', hint: 'Base of the neck, collar line', fig: 'neck', min: 12, max: 20, def: 15.5, ease: [0.5, 0.75, 1],
+        how: 'Wrap the tape around the base of the neck, where a collar sits. Keep one finger between the tape and your neck.' },
+      { id: 'chest', label: 'Chest', hint: 'Fullest part, under the arms', fig: 'chest', min: 30, max: 60, def: 38, ease: [3, 4.5, 6],
+        how: 'Breathe out normally. Wrap the tape under the arms and across the fullest part of the chest and the shoulder blades. Keep it level at the back.' },
+      { id: 'waist', label: 'Waist', hint: 'At the navel, relaxed', fig: 'waist', min: 26, max: 55, def: 34, ease: [3, 5, 7],
+        how: 'Around your natural waist, level with the navel. Stand relaxed and do not pull your stomach in.' },
+      { id: 'hip', label: 'Hip', hint: 'Fullest part of the seat', fig: 'hip', min: 30, max: 60, def: 38, ease: [3, 4, 6],
+        how: 'Around the fullest part of the hips and seat, feet together. Keep the tape level all the way round.' },
+      { id: 'shoulder', label: 'Shoulder', hint: 'Bone tip to bone tip, across the back', fig: 'shoulder', min: 13, max: 24, def: 17, ease: [0, 0.25, 0.5],
+        how: 'Across the back from the bony tip of one shoulder to the other. Someone else will find this easier to measure.' },
+      { id: 'sleeve', label: 'Sleeve length', hint: 'Shoulder tip to wrist bone', fig: 'sleeve', min: 20, max: 31, def: 25, ease: [0.5, 0.5, 0.75],
+        how: 'From the shoulder tip, down the slightly bent arm, to the wrist bone.' },
+      { id: 'shirtLength', label: 'Shirt length', hint: 'Back of neck to hem', fig: 'length', min: 24, max: 36, def: 29, ease: [0, 0, 0],
+        how: 'From the bump at the base of the back of the neck down to where you want the hem. Mid-seat is usual for an untucked shirt.' }
+    ],
+    kurta: [
+      { id: 'neck', label: 'Neck', hint: 'Base of the neck, collar line', fig: 'neck', min: 12, max: 20, def: 15.5, ease: [1, 1.25, 1.5],
+        how: 'Wrap the tape around the base of the neck, where a collar sits. Keep one finger between the tape and your neck.' },
+      { id: 'chest', label: 'Chest', hint: 'Fullest part, under the arms', fig: 'chest', min: 30, max: 60, def: 38, ease: [4, 6, 8],
+        how: 'Breathe out normally. Wrap the tape under the arms and across the fullest part of the chest and the shoulder blades. Keep it level at the back.' },
+      { id: 'waist', label: 'Waist', hint: 'At the navel, relaxed', fig: 'waist', min: 26, max: 55, def: 34, ease: [5, 7, 10],
+        how: 'Around your natural waist, level with the navel. Stand relaxed and do not pull your stomach in.' },
+      { id: 'hip', label: 'Hip', hint: 'Fullest part of the seat', fig: 'hip', min: 30, max: 60, def: 38, ease: [4, 6, 8],
+        how: 'Around the fullest part of the hips and seat, feet together. Keep the tape level all the way round.' },
+      { id: 'shoulder', label: 'Shoulder', hint: 'Bone tip to bone tip, across the back', fig: 'shoulder', min: 13, max: 24, def: 17, ease: [0, 0.25, 0.5],
+        how: 'Across the back from the bony tip of one shoulder to the other. Someone else will find this easier to measure.' },
+      { id: 'sleeve', label: 'Sleeve length', hint: 'Shoulder tip to wrist bone', fig: 'sleeve', min: 20, max: 31, def: 25, ease: [0.5, 0.5, 1],
+        how: 'From the shoulder tip, down the slightly bent arm, to the wrist bone.' },
+      { id: 'kurtaLength', label: 'Kurta length', hint: 'Back of neck to hem', fig: 'length', min: 30, max: 52, def: 40, ease: [0, 0, 0],
+        how: 'From the bump at the base of the back of the neck down to where you want the hem. Mid-thigh to knee is usual; check against a kurta you already like.' }
+    ],
+    trouser: [
+      { id: 'trWaist', label: 'Waist', hint: 'Where your trousers sit', fig: 'waist', min: 26, max: 52, def: 34, ease: [1, 1.5, 2],
+        how: 'Around the waist where you wear your trousers, usually just below the navel. This is often 1 to 2 in bigger than your natural waist.' },
+      { id: 'hip', label: 'Hip', hint: 'Fullest part of the seat', fig: 'hip', min: 30, max: 60, def: 38, ease: [3, 4, 6],
+        how: 'Around the fullest part of the hips and seat, feet together. Keep the tape level all the way round.' },
+      { id: 'thigh', label: 'Thigh', hint: 'Fullest part of the upper thigh', fig: 'thigh', min: 16, max: 35, def: 22, ease: [2.5, 3.5, 5],
+        how: 'Around the fullest part of the upper thigh, just below the seat, standing with your weight on both feet.' },
+      { id: 'inseam', label: 'Inseam', hint: 'Crotch to ankle bone', fig: 'inseam', min: 24, max: 38, def: 30, ease: [0, 0, 0],
+        how: 'From the crotch seam down the inside of the leg to the ankle bone. Wear the shoes you will use with the trousers; the tailor sets the hem.' },
+      { id: 'outseam', label: 'Full length', hint: 'Waist to ankle bone, along the side', fig: 'outseam', min: 36, max: 48, def: 41, ease: [0, 0, 0],
+        how: 'From the side of the waist, over the hip, down to the ankle bone. Tailors use this to set the full trouser length.' }
+    ]
+  };
+  var GN = { shirt: 'Shirt', kurta: 'Kurta', trouser: 'Trouser' };
+  var FITS = ['Slim', 'Regular', 'Relaxed'];
+  var FITNOTE = [
+    'Slim: close to the body, with just enough room to move.',
+    'Regular: the comfortable everyday fit and the usual choice.',
+    'Relaxed: loose and airy, good for summer and festive wear.'
+  ];
+
+  var st = { g: 'shirt', fit: 1, unit: 'in', touched: false, active: null };
+  var vals = {};
+  Object.keys(SPEC).forEach(function (g) {
+    SPEC[g].forEach(function (s) { if (!(s.id in vals)) vals[s.id] = s.def; });
+  });
+
+  function load() {
+    try {
+      var s = JSON.parse(localStorage.getItem('naap.v1') || 'null');
+      if (!s) return;
+      if (SPEC[s.g]) st.g = s.g;
+      if (s.fit === 0 || s.fit === 1 || s.fit === 2) st.fit = s.fit;
+      if (s.unit === 'in' || s.unit === 'cm') st.unit = s.unit;
+      st.touched = !!s.touched;
+      if (s.vals) Object.keys(vals).forEach(function (k) {
+        if (s.vals[k] === null) vals[k] = NaN;
+        else if (typeof s.vals[k] === 'number') vals[k] = s.vals[k];
+      });
+    } catch (e) {}
+  }
+  function save() {
+    try { localStorage.setItem('naap.v1', JSON.stringify({ g: st.g, fit: st.fit, unit: st.unit, touched: st.touched, vals: vals })); } catch (e) {}
+  }
+
+  function specs() { return SPEC[st.g]; }
+  function byId(id) { return specs().filter(function (s) { return s.id === id; })[0]; }
+  function unitWord() { return st.unit === 'in' ? 'inches' : 'centimetres'; }
+
+  function fracIn(x) {
+    var q = Math.round(x * 4) / 4, w = Math.floor(q), f = q - w;
+    var g = f === 0.25 ? '¼' : f === 0.5 ? '½' : f === 0.75 ? '¾' : '';
+    return (w === 0 && g) ? g : String(w) + g;
+  }
+  function L(x) {
+    if (st.unit === 'in') return fracIn(x);
+    return String(Math.round(x * 2.54 * 2) / 2);
+  }
+  function plain(x) { return st.unit === 'in' ? String(x) : String(Math.round(x * 2.54)); }
+  function inputText(inches) {
+    if (isNaN(inches)) return '';
+    return st.unit === 'in' ? String(Number(inches.toFixed(2))) : String(Number((inches * 2.54).toFixed(1)));
+  }
+  function parse(text) {
+    var t = String(text).trim().replace(',', '.');
+    if (!t) return NaN;
+    var m = t.match(/^(\d+)\s+(\d+)\s*\/\s*(\d+)$/);
+    var v;
+    if (m) v = Number(m[1]) + Number(m[2]) / Number(m[3]);
+    else if ((m = t.match(/^(\d+)\s*\/\s*(\d+)$/))) v = Number(m[1]) / Number(m[2]);
+    else v = parseFloat(t);
+    if (!isFinite(v)) return NaN;
+    return st.unit === 'in' ? v : v / 2.54;
+  }
+
+  function renderFields() {
+    var u = st.unit === 'in' ? 'in' : 'cm';
+    $('#fields').innerHTML = specs().map(function (s) {
+      return '<div class="field" data-id="' + s.id + '">' +
+        '<div><label class="name" for="in-' + s.id + '">' + s.label + '</label><span class="hint">' + s.hint + '</span></div>' +
+        '<div class="inwrap"><input id="in-' + s.id + '" type="text" inputmode="decimal" autocomplete="off" value="' + inputText(vals[s.id]) + '"><span class="u">' + u + '</span></div>' +
+        '<div class="err" hidden></div></div>';
+    }).join('');
+    specs().forEach(check);
+  }
+
+  function check(s) {
+    var f = document.querySelector('.field[data-id="' + s.id + '"]');
+    if (!f) return;
+    var e = f.querySelector('.err'), v = vals[s.id];
+    var bad = !isNaN(v) && (v < s.min || v > s.max);
+    f.classList.toggle('bad', bad);
+    e.hidden = !bad;
+    if (bad) e.textContent = 'Check this number. Most adults measure between ' + plain(s.min) + ' and ' + plain(s.max) + ' ' + (st.unit === 'in' ? 'in' : 'cm') + ' here.';
+  }
+
+  function setActive(s) {
+    st.active = s.id;
+    $('#hTitle').textContent = s.label;
+    $('#hText').textContent = s.how;
+    $('#hRange').textContent = 'Typical adult range: ' + plain(s.min) + ' to ' + plain(s.max) + ' ' + (st.unit === 'in' ? 'in' : 'cm');
+    document.querySelectorAll('.mk').forEach(function (m) { m.classList.toggle('on', m.getAttribute('data-k') === s.fig); });
+    document.querySelector('.mk[data-k="length"]').setAttribute('y2', st.g === 'kurta' ? 300 : 232);
+  }
+
+  function sizeFor(b) {
+    if (b < 37.5) return 'S';
+    if (b < 40) return 'M';
+    if (b < 42.5) return 'L';
+    if (b < 45) return 'XL';
+    if (b < 48) return 'XXL';
+    if (b < 51) return '3XL';
+    return '4XL or above';
+  }
+  function sizeLine() {
+    var missing = specs().filter(function (s) { return isNaN(vals[s.id]); }).length;
+    if (missing) return missing + (missing > 1 ? ' measurements are' : ' measurement is') + ' still to enter.';
+    if (st.g === 'trouser') {
+      var w = vals.trWaist;
+      return 'Closest ready-made trouser size: ' + (Math.round(w / 2) * 2) + ' (waist in inches). Brands differ, so check their chart.';
+    }
+    return 'Closest ready-made size: ' + sizeFor(vals.chest) + ' (body chest ' + L(vals.chest) + (st.unit === 'in' ? ' in' : ' cm') + '). Brands differ, so check their chart.';
+  }
+
+  function renderSheet() {
+    $('#meta').textContent = GN[st.g] + ' · ' + FITS[st.fit] + ' fit · ' + unitWord();
+    $('#rows').innerHTML = specs().map(function (s) {
+      var b = vals[s.id], e = s.ease[st.fit], ok = !isNaN(b);
+      return '<tr><td>' + s.label + '</td><td class="n">' + (ok ? L(b) : '—') + '</td><td class="n">' +
+        (e ? '+' + L(e) : '—') + '</td><td class="n final">' + (ok ? L(b + e) : '—') + '</td></tr>';
+    }).join('');
+    $('#size').textContent = sizeLine();
+    $('#txt').textContent = buildText();
+  }
+
+  function buildText() {
+    var lines = [GN[st.g] + ' · ' + FITS[st.fit] + ' fit (' + unitWord() + ')'];
+    specs().forEach(function (s) {
+      var b = vals[s.id], e = s.ease[st.fit];
+      if (isNaN(b)) { lines.push(s.label + ': not entered'); return; }
+      lines.push(s.label + ': ' + (e ? L(b) + ' + ' + L(e) + ' = ' + L(b + e) : L(b)));
+    });
+    lines.push('Stitch size = body measurement + ease for a ' + FITS[st.fit].toLowerCase() + ' fit.');
+    return lines.join('\n');
+  }
+
+  function renderAll() {
+    document.querySelector('#g-' + st.g).checked = true;
+    document.querySelector('#f-' + st.fit).checked = true;
+    document.querySelector('#u-' + st.unit).checked = true;
+    $('#fitnote').textContent = FITNOTE[st.fit];
+    $('#sample').hidden = st.touched;
+    renderFields();
+    renderSheet();
+    var a = byId(st.active) || specs()[0];
+    setActive(a);
+  }
+
+  document.querySelectorAll('input[name=g]').forEach(function (r) {
+    r.addEventListener('change', function () { st.g = r.value; st.active = null; renderAll(); save(); });
+  });
+  document.querySelectorAll('input[name=fit]').forEach(function (r) {
+    r.addEventListener('change', function () { st.fit = Number(r.value); $('#fitnote').textContent = FITNOTE[st.fit]; renderSheet(); save(); });
+  });
+  document.querySelectorAll('input[name=unit]').forEach(function (r) {
+    r.addEventListener('change', function () { st.unit = r.value; renderAll(); save(); });
+  });
+
+  var box = $('#fields');
+  box.addEventListener('input', function (e) {
+    var f = e.target.closest('.field'); if (!f) return;
+    var s = byId(f.getAttribute('data-id'));
+    vals[s.id] = parse(e.target.value);
+    st.touched = true; $('#sample').hidden = true;
+    check(s); renderSheet(); save();
+  });
+  box.addEventListener('focusin', function (e) {
+    var f = e.target.closest('.field'); if (!f) return;
+    setActive(byId(f.getAttribute('data-id')));
+  });
+  box.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter') return;
+    var inputs = Array.prototype.slice.call(box.querySelectorAll('input'));
+    var i = inputs.indexOf(e.target);
+    if (i > -1 && inputs[i + 1]) { e.preventDefault(); inputs[i + 1].focus(); inputs[i + 1].select(); }
+  });
+
+  $('#clear').addEventListener('click', function () {
+    Object.keys(vals).forEach(function (k) { vals[k] = NaN; });
+    st.touched = true;
+    renderAll(); save();
+    var first = box.querySelector('input'); if (first) first.focus();
+  });
+
+  $('#copy').addEventListener('click', function () {
+    var text = buildText(), status = $('#status');
+    function fallback() {
+      var d = $('#det'); d.open = true;
+      var r = document.createRange(); r.selectNodeContents($('#txt'));
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      status.textContent = 'Text is selected below. Press Copy on your keyboard.';
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { status.textContent = 'Copied. Paste it into WhatsApp or a message.'; }, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  load();
+  renderAll();
+})();
+</script>
+
+</body></html>
