@@ -211,6 +211,41 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
 .event-table th { text-align: left; padding: 8px 10px; background: var(--bg); color: var(--muted); border-bottom: 1px solid var(--line); font-weight: 600; font-size: .74rem; text-transform: uppercase; }
 .event-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); color: var(--fg); }
 .modal-footer { padding: 14px 24px; border-top: 1px solid var(--line); background: var(--bg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+
+/* Real Cloth vs Sketch Switcher */
+.vmode-tabs { display: flex; background: var(--bg); border: 1.5px solid var(--line); border-radius: 999px; padding: 4px; gap: 4px; margin-bottom: 12px; }
+.vtab { flex: 1; border: 0; background: none; border-radius: 999px; padding: 8px 12px; font-size: .83rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: all .18s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.vtab.active { background: var(--surface); color: var(--accent); box-shadow: 0 3px 10px rgba(0,0,0,0.08); font-weight: 700; }
+.cloth-spec-pill { display: inline-flex; align-items: center; gap: 6px; font-size: .75rem; background: var(--surface); border: 1px solid var(--line); padding: 5px 12px; border-radius: 999px; color: var(--muted); font-weight: 600; margin-top: 8px; justify-content: center; width: 100%; }
+
+/* Inspiration Photo Upload Banner */
+.ref-banner { background: linear-gradient(135deg, var(--accent-soft) 0%, var(--surface) 100%); border: 2px dashed var(--accent); border-radius: 20px; padding: 16px 20px; margin-bottom: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; box-shadow: 0 6px 20px rgba(212, 66, 125, 0.08); }
+.ref-b-left { display: flex; align-items: center; gap: 14px; }
+.ref-icon { font-size: 2rem; line-height: 1; }
+.ref-b-left strong { font-size: 1.05rem; display: block; color: var(--fg); font-family: var(--display); font-weight: 700; }
+.ref-b-left p { margin: 2px 0 0; font-size: .86rem; color: var(--muted); }
+.ref-b-right { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn.sm { padding: 9px 18px; font-size: .86rem; border-radius: 999px; }
+
+/* Uploaded Image Customization Card */
+.ref-card { background: var(--surface); border: 2px solid var(--accent); border-radius: 20px; padding: 18px; margin-bottom: 24px; box-shadow: 0 12px 36px rgba(0,0,0,0.09); animation: slideUp .25s ease-out; }
+.ref-card-grid { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 640px) { .ref-card-grid { grid-template-columns: 1fr; } }
+.ref-thumb-wrap { position: relative; border-radius: 14px; overflow: hidden; border: 2px solid var(--line); aspect-ratio: 3/4; max-height: 180px; background: #000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.ref-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ref-palette-box { margin-top: 10px; }
+.ref-color-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.ref-col-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; border: 1.5px solid var(--line); font-size: .78rem; font-weight: 600; cursor: pointer; background: var(--surface); transition: transform .15s, border-color .15s; }
+.ref-col-chip:hover { transform: scale(1.06); border-color: var(--accent); }
+.ref-col-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.2); }
+
+/* Chat attachment */
+.wa-attach-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 6px; border-top: 1px dashed var(--line); margin-top: 4px; }
+.wa-attach-btn { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; font-weight: 600; color: var(--accent); cursor: pointer; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); transition: background .15s; }
+.wa-attach-btn:hover { background: var(--accent-soft); border-color: var(--accent); }
+.wa-attached-thumb { position: relative; display: flex; align-items: center; gap: 8px; }
+.wa-attached-thumb img { width: 38px; height: 38px; object-fit: cover; border-radius: 8px; border: 2px solid var(--accent); }
+.wa-attached-thumb button { background: var(--warn); color: #fff; border: 0; width: 20px; height: 20px; border-radius: 50%; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; padding: 0; }
 </style>
 </head>
 <body>
@@ -242,9 +277,74 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     </div>
   </section>
 
+  <!-- Inspiration Photo Upload & Camera Banner -->
+  <div class="ref-banner">
+    <div class="ref-b-left">
+      <span class="ref-icon">📸</span>
+      <div>
+        <strong>Have a dress photo you love? Snap or Upload to customize it!</strong>
+        <p>Take a photo or upload any dress picture. We'll extract its colors and stitch it to your exact measurements!</p>
+      </div>
+    </div>
+    <div class="ref-b-right">
+      <button class="btn alt sm" id="btnSnapPhoto" type="button">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Take Photo
+      </button>
+      <button class="btn alt sm" id="btnUploadPhoto" type="button">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+        Upload Photo
+      </button>
+      <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;">
+      <input type="file" id="galleryInput" accept="image/*" style="display:none;">
+    </div>
+  </div>
+
+  <!-- Uploaded Reference Dress Customization Card (Hidden by default) -->
+  <div id="uploadedRefCard" class="ref-card" style="display:none;">
+    <div class="ref-card-grid">
+      <div class="ref-thumb-wrap">
+        <img id="refCardImg" src="" alt="Reference Dress">
+      </div>
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:start;">
+          <div>
+            <h4 style="margin:0; font-family:var(--display); font-size:1.15rem; color:var(--fg);">✨ Your Uploaded Inspiration Dress</h4>
+            <p style="margin:3px 0 0; font-size:.85rem; color:var(--muted);">We've analyzed your photo. Pick extracted colors or tell us what parts to adapt below!</p>
+          </div>
+          <button type="button" id="removeRefCardBtn" class="linkbtn" style="color:var(--warn); font-size:.85rem;">Remove Photo</button>
+        </div>
+
+        <div class="ref-palette-box">
+          <span style="font-size:.78rem; text-transform:uppercase; letter-spacing:.05em; font-weight:700; color:var(--muted);">Colors Detected in Your Photo (Click to Apply):</span>
+          <div class="ref-color-chips" id="refColorChips">
+            <!-- Populated via canvas color extraction -->
+          </div>
+        </div>
+
+        <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:12px; font-size:.84rem;">
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="refMatchNeck" checked> Recreate Neckline from photo</label>
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="refMatchSleeve" checked> Recreate Sleeves from photo</label>
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="refAddPockets"> Add Hidden Pockets (+₹30)</label>
+        </div>
+
+        <div style="margin-top:10px;">
+          <input type="text" id="refCustomNotes" placeholder="Any specific tweak? e.g. Make neckline 1 inch higher, add side tassels, deep back neck..." style="width:100%; font-size:.86rem; padding:9px 12px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--fg);">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <section id="design" class="build" aria-label="Design your dress">
     <div class="pvcard">
+      <div class="vmode-tabs">
+        <button class="vtab active" id="tabSketch" type="button">🎨 Fashion Sketch</button>
+        <button class="vtab" id="tabRealistic" type="button">👗 Real Cloth Drape</button>
+      </div>
       <div class="pv" id="pv"></div>
+      <div class="cloth-spec-pill" id="clothPill" style="display:none;">
+        <span id="clothPillIcon">🧵</span> <span id="clothPillText">Mulmul Soft Cotton Crepe Drape</span>
+      </div>
       <div class="buy">
         <div><div class="plabel">Estimated Price</div><div class="price" id="price"></div></div>
         <button class="btn" id="add" type="button">
@@ -327,6 +427,17 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
         <button type="button" class="wa-chip" data-q="Can I send my own fabric or request custom hand-embroidery?">🧵 Can I send my own fabric?</button>
         <button type="button" class="wa-chip" data-q="What is the fastest delivery date if I order this dress today?">⚡ Urgent delivery query</button>
         <button type="button" class="wa-chip" data-q="I want a custom neck or sleeve variation not shown here. Can you stitch it?">✨ Custom neckline / styling request</button>
+      </div>
+      <div class="wa-attach-row">
+        <label class="wa-attach-btn" for="waChatImageInput" title="Attach dress photo, fabric swatch or sketch">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/></svg>
+          <span>Attach Photo / Sketch</span>
+        </label>
+        <input type="file" id="waChatImageInput" accept="image/*" style="display:none;">
+        <div id="waAttachedPreview" class="wa-attached-thumb" style="display:none;">
+          <img id="waThumbImg" src="" alt="Attached photo">
+          <button type="button" id="removeWaAttachBtn" title="Remove attachment">&times;</button>
+        </div>
       </div>
       <div class="wa-input-wrap">
         <textarea id="waCustomMsg" rows="2" placeholder="Or type your specific question here..."></textarea>
@@ -419,10 +530,10 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   var ANALYTICS_WEBHOOK_URL = '';       /* Optional: Paste a Google Sheet or Cloudflare Worker webhook URL here */
   var LEAD_TIME = '5 to 7 days';
   var PRICES = {
-    base: { kurti: 499, aline: 549, sundress: 579, anarkali: 599, lehenga: 629 },
-    material: { cotton: 0, georgette: 30, silk: 50, organza: 40 },
-    pattern: { solid: 0, floral: 20, polka: 20, booti: 30 },
-    extra: { pocket: 30, belt: 25, ruffleHem: 30, gotaSlits: 25 }
+    base: { kurti: 499, aline: 519, sundress: 539, anarkali: 559, lehenga: 579 },
+    material: { cotton: 0, georgette: 25, silk: 35, organza: 30 },
+    pattern: { solid: 0, floral: 15, polka: 15, booti: 25 },
+    extra: { pocket: 20, belt: 15, ruffleHem: 20, gotaSlits: 15 }
   };
 
   /* Pretty Dresses & Silhouettes for Girls */
@@ -459,16 +570,16 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
 
   var MATERIALS = [
     ['cotton', 'Mulmul Soft Cotton'],
-    ['georgette', 'Flowy Georgette'],
-    ['silk', 'Mulberry Silk Blend'],
-    ['organza', 'Sheer Organza']
+    ['georgette', 'Flowy Georgette (+₹25)'],
+    ['silk', 'Mulberry Silk Blend (+₹35)'],
+    ['organza', 'Sheer Organza (+₹30)']
   ];
 
   var PATTERNS = [
     ['solid', 'Pure Solid'],
-    ['floral', 'Daisy Floral'],
-    ['polka', 'French Polka Dot'],
-    ['booti', 'Golden Zari Booti']
+    ['floral', 'Daisy Floral (+₹15)'],
+    ['polka', 'French Polka Dot (+₹15)'],
+    ['booti', 'Golden Zari Booti (+₹25)']
   ];
 
   /* Detailed Customization Options */
@@ -477,37 +588,37 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       { k: 'neck', label: 'Neckline', def: 'sweetheart', ch: [['sweetheart', 'Sweetheart'], ['square', 'Square Cut'], ['vneck', 'Soft V-Neck'], ['boat', 'Boat Neck'], ['round', 'Classic Round']] },
       { k: 'sleeve', label: 'Sleeves', def: 'puff', ch: [['puff', 'Romantic Puff'], ['flutter', 'Ruffle / Flutter'], ['sleeveless', 'Sleeveless'], ['full', 'Full Bishop Sleeves'], ['cap', 'Cap Sleeves']] },
       { k: 'length', label: 'Dress Length', def: 'knee', ch: [['mini', 'Above Knee'], ['knee', 'Knee Length'], ['midi', 'Calf Midi']] },
-      { k: 'waistDetail', label: 'Waist Styling', def: 'bow', ch: [['none', 'Clean Plain'], ['bow', 'Tie-up Bow Sash'], ['belt', 'Fabric Belt']] },
-      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pockets (+₹30)']] }
+      { k: 'waistDetail', label: 'Waist Styling', def: 'bow', ch: [['none', 'Clean Plain'], ['bow', 'Tie-up Bow Sash (+₹15)'], ['belt', 'Fabric Belt (+₹15)']] },
+      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pockets (+₹20)']] }
     ],
     kurti: [
       { k: 'silhouette', label: 'Kurti Style', def: 'straight', ch: [['straight', 'Straight Cut (Classic Slits)'], ['nyra', 'Nyra Cut (High Slits & Gathers)'], ['peplum', 'Short Peplum Tunic'], ['aline', 'A-Line Flared Kurti']] },
       { k: 'neck', label: 'Neckline', def: 'mandarin', ch: [['mandarin', 'Mandarin Collar & V-Slit'], ['angrakha', 'Angrakha Overlap & Dori Tie'], ['keyhole', 'Keyhole with Potli Button'], ['sweetheart', 'Sweetheart with Gota'], ['round', 'Round Neck & Slit']] },
       { k: 'sleeve', label: 'Sleeve Style', def: 'threeFourth', ch: [['threeFourth', '3/4th with Lace Border'], ['bell', 'Flared Bell Sleeves'], ['puff', 'Puff Sleeves with Cuff'], ['sleeveless', 'Sleeveless with Piping'], ['full', 'Full Churidar Sleeves']] },
       { k: 'length', label: 'Kurti Length', def: 'knee', ch: [['short', 'Hip Length (Short 32")'], ['knee', 'Knee Length (40")'], ['calf', 'Calf Long Kurti (45")']] },
-      { k: 'slits', label: 'Slit Detailing', def: 'gota', ch: [['gota', 'Slits with Gota Patti Trim (+₹25)'], ['plain', 'Clean Plain Slits'], ['frontSlit', 'Center Front Slit']] },
-      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pocket (+₹30)']] }
+      { k: 'slits', label: 'Slit Detailing', def: 'gota', ch: [['gota', 'Slits with Gota Patti Trim (+₹15)'], ['plain', 'Clean Plain Slits'], ['frontSlit', 'Center Front Slit']] },
+      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pocket (+₹20)']] }
     ],
     sundress: [
       { k: 'neck', label: 'Neckline', def: 'square', ch: [['square', 'Square Cut'], ['sweetheart', 'Sweetheart'], ['vneck', 'Soft V-Neck'], ['round', 'Round Neck']] },
       { k: 'sleeve', label: 'Sleeves', def: 'flutter', ch: [['flutter', 'Ruffle / Flutter'], ['puff', 'Puff Sleeves'], ['sleeveless', 'Spaghetti Straps'], ['cap', 'Cap Sleeves']] },
       { k: 'length', label: 'Length & Tiers', def: 'midi', ch: [['knee', '2-Tier Knee'], ['midi', '3-Tier Midi'], ['maxi', 'Floor Maxi']] },
-      { k: 'hemDetail', label: 'Hem Finish', def: 'ruffleHem', ch: [['plain', 'Plain Hem'], ['ruffleHem', 'Ruffle Frill Hem (+₹30)']] },
-      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pockets (+₹30)']] }
+      { k: 'hemDetail', label: 'Hem Finish', def: 'ruffleHem', ch: [['plain', 'Plain Hem'], ['ruffleHem', 'Ruffle Frill Hem (+₹20)']] },
+      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pockets (+₹20)']] }
     ],
     anarkali: [
       { k: 'neck', label: 'Neckline', def: 'sweetheart', ch: [['sweetheart', 'Sweetheart with Zari'], ['round', 'Deep Round'], ['boat', 'Boat Neck'], ['angrakha', 'Cross Angrakha']] },
       { k: 'sleeve', label: 'Sleeves', def: 'full', ch: [['full', 'Churidar Full'], ['puff', 'Puff with Cuff'], ['sleeveless', 'Sleeveless'], ['half', 'Elbow Length']] },
       { k: 'length', label: 'Gown Length', def: 'floor', ch: [['ankle', 'Ankle Length'], ['floor', 'Floor Twirl Gown']] },
-      { k: 'waistDetail', label: 'Dori / Latkan', def: 'bow', ch: [['none', 'Clean Seam'], ['bow', 'Side Dori with Latkans']] },
-      { k: 'pocket', label: 'Pockets', def: 'none', ch: [['none', 'No Pockets'], ['yes', 'Hidden Pocket (+₹30)']] }
+      { k: 'waistDetail', label: 'Dori / Latkan', def: 'bow', ch: [['none', 'Clean Seam'], ['bow', 'Side Dori with Latkans (+₹15)']] },
+      { k: 'pocket', label: 'Pockets', def: 'none', ch: [['none', 'No Pockets'], ['yes', 'Hidden Pocket (+₹20)']] }
     ],
     lehenga: [
       { k: 'neck', label: 'Blouse Neckline', def: 'sweetheart', ch: [['sweetheart', 'Sweetheart'], ['vneck', 'Plunging V'], ['square', 'Square Neck'], ['boat', 'Boat Neck']] },
       { k: 'sleeve', label: 'Blouse Sleeves', def: 'puff', ch: [['puff', 'Princess Puff'], ['sleeveless', 'Sleeveless'], ['elbow', 'Elbow Sleeve'], ['cap', 'Cap Sleeve']] },
       { k: 'skirtFlare', label: 'Skirt Ghera', def: 'flare', ch: [['flare', 'Flared Ghera (4m)'], ['kalidar', 'Kalidar Pleats (6m)']] },
-      { k: 'waistDetail', label: 'Skirt Tie', def: 'bow', ch: [['bow', 'Designer Dori & Bow'], ['belt', 'Embroidered Belt']] },
-      { k: 'pocket', label: 'Skirt Pocket', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Skirt Pocket (+₹30)']] }
+      { k: 'waistDetail', label: 'Skirt Tie', def: 'bow', ch: [['bow', 'Designer Dori & Bow (+₹15)'], ['belt', 'Embroidered Belt (+₹15)']] },
+      { k: 'pocket', label: 'Skirt Pocket', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Skirt Pocket (+₹20)']] }
     ]
   };
 
@@ -561,6 +672,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   var st = {
     g: 'aline',
     fabric: 0,
+    customHex: null,
     material: 'cotton',
     pattern: 'solid',
     fit: 'regular',
@@ -568,7 +680,11 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     method: 'enter',
     vals: {},
     cart: [],
-    form: { name: '', phone: '', address: '' }
+    form: { name: '', phone: '', address: '' },
+    viewMode: 'sketch',
+    refImage: null,
+    refCustomNotes: '',
+    chatAttachment: null
   };
 
   Object.keys(OPTS).forEach(function (g) {
@@ -615,19 +731,57 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
 
   function buildDress(c, uid) {
     var col = colors(c.hex), o = c.opts, s = '';
+    var isReal = c.viewMode === 'realistic';
     var pat = c.pattern === 'floral' ? 'fl' + uid : c.pattern === 'polka' ? 'pk' + uid : c.pattern === 'booti' ? 'bt' + uid : '';
+    var activeWeave = 'weave_' + (c.material || 'cotton') + '_' + uid;
 
     function part(d) {
-      return '<path d="' + d + '" fill="' + c.hex + '" stroke="' + col.stroke + '" stroke-width="1.8" stroke-linejoin="round"/>' +
-        (pat ? '<path d="' + d + '" fill="url(#' + pat + ')"/>' : '');
+      var res = '<path d="' + d + '" fill="' + c.hex + '" stroke="' + col.stroke + '" stroke-width="' + (isReal ? '1.2' : '1.8') + '" stroke-linejoin="round"/>';
+      if (isReal) {
+        res += '<path d="' + d + '" fill="url(#' + activeWeave + ')" opacity="0.6"/>';
+        res += '<path d="' + d + '" fill="url(#drapeLight_' + uid + ')" opacity="0.4"/>';
+      }
+      if (pat) {
+        res += '<path d="' + d + '" fill="url(#' + pat + ')"' + (isReal ? ' opacity="0.9"' : '') + '/>';
+      }
+      return res;
     }
     function mir(inner) { return '<g transform="matrix(-1 0 0 1 300 0)">' + inner + '</g>'; }
     function pair(d) { return part(d) + mir(part(d)); }
     function line(d, w, strokeCol) { return '<path d="' + d + '" fill="none" stroke="' + (strokeCol || col.stroke) + '" stroke-width="' + (w || 1.4) + '" stroke-linecap="round"/>'; }
     function goldTrim(d) { return '<path d="' + d + '" fill="none" stroke="' + col.gold + '" stroke-width="2.2" stroke-dasharray="3,2"/>'; }
 
-    // Pattern Definitions
+    // Pattern & Real Fabric Texture Definitions
     var defs = '<defs>' +
+      // 1. Realistic Fabric Weaves
+      '<pattern id="weave_cotton_' + uid + '" width="8" height="8" patternUnits="userSpaceOnUse">' +
+      '<line x1="0" y1="2" x2="8" y2="2" stroke="rgba(0,0,0,0.12)" stroke-width="0.8"/>' +
+      '<line x1="0" y1="6" x2="8" y2="6" stroke="rgba(255,255,255,0.18)" stroke-width="0.8"/>' +
+      '<line x1="2" y1="0" x2="2" y2="8" stroke="rgba(0,0,0,0.08)" stroke-width="0.7"/>' +
+      '<line x1="6" y1="0" x2="6" y2="8" stroke="rgba(255,255,255,0.15)" stroke-width="0.7"/>' +
+      '</pattern>' +
+      '<pattern id="weave_georgette_' + uid + '" width="6" height="6" patternUnits="userSpaceOnUse">' +
+      '<circle cx="2" cy="2" r="0.9" fill="rgba(0,0,0,0.14)"/>' +
+      '<circle cx="5" cy="5" r="0.9" fill="rgba(255,255,255,0.24)"/>' +
+      '<path d="M0 3 Q3 1 6 3" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>' +
+      '</pattern>' +
+      '<pattern id="weave_silk_' + uid + '" width="14" height="14" patternUnits="userSpaceOnUse">' +
+      '<line x1="0" y1="14" x2="14" y2="0" stroke="rgba(255,255,255,0.28)" stroke-width="1.6"/>' +
+      '<line x1="0" y1="7" x2="7" y2="0" stroke="rgba(0,0,0,0.08)" stroke-width="0.9"/>' +
+      '</pattern>' +
+      '<pattern id="weave_organza_' + uid + '" width="10" height="10" patternUnits="userSpaceOnUse">' +
+      '<rect width="10" height="10" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>' +
+      '<circle cx="5" cy="5" r="1.5" fill="rgba(255,255,255,0.2)"/>' +
+      '</pattern>' +
+      // 2. Realistic Studio Light Gradient
+      '<linearGradient id="drapeLight_' + uid + '" x1="0%" y1="0%" x2="100%" y2="0%">' +
+      '<stop offset="0%" stop-color="#000000" stop-opacity="0.28"/>' +
+      '<stop offset="22%" stop-color="#FFFFFF" stop-opacity="0.22"/>' +
+      '<stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.32"/>' +
+      '<stop offset="78%" stop-color="#FFFFFF" stop-opacity="0.14"/>' +
+      '<stop offset="100%" stop-color="#000000" stop-opacity="0.32"/>' +
+      '</linearGradient>' +
+      // 3. Dress Patterns
       (c.pattern === 'floral' ?
         '<pattern id="fl' + uid + '" width="22" height="22" patternUnits="userSpaceOnUse">' +
         '<circle cx="11" cy="11" r="3" fill="#FFF275"/>' +
@@ -646,6 +800,24 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
         '<circle cx="12" cy="16" r="1.2" fill="' + col.gold + '"/>' +
         '</pattern>' : '') +
       '</defs>';
+
+    // Atelier Haute Couture Mannequin Form (Shown in Realistic Mode)
+    var mannequin = '';
+    if (isReal) {
+      mannequin = '<g id="mannequin_' + uid + '">' +
+        // Turned Wood Finial
+        '<circle cx="150" cy="22" r="6" fill="#8B5A2B"/>' +
+        '<rect x="146" y="27" width="8" height="11" rx="3" fill="#A06830"/>' +
+        '<ellipse cx="150" cy="38" rx="8" ry="4" fill="#8B5A2B"/>' +
+        // Ivory Linen Neck
+        '<path d="M141 38 L159 38 L163 70 L137 70 Z" fill="#F4EEEA" stroke="#D8C8BF" stroke-width="1.2"/>' +
+        // Ivory Shoulder Form Base
+        '<path d="M98 75 Q150 68 202 75 L206 90 Q150 83 94 90 Z" fill="#EAE2DC"/>' +
+        // Turned Wood Stand Base at Bottom
+        '<rect x="147" y="405" width="6" height="25" fill="#8B5A2B"/>' +
+        '<ellipse cx="150" cy="428" rx="34" ry="6" fill="#A06830"/>' +
+        '</g>';
+    }
 
     // Dress Silhouette Geometry
     var waistY = c.g === 'lehenga' ? 142 : 160;
@@ -856,26 +1028,74 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       s += mir(line('M95 210 Q105 218 102 238', 2.2, col.gold));
     }
 
+    // Realistic Draping Folds Overlay
+    var drapeFolds = '';
+    if (isReal) {
+      var hemY = skirtHemY;
+      var wY = (c.g === 'lehenga') ? 175 : waistY;
+      if (c.g === 'anarkali' || c.g === 'aline' || c.g === 'lehenga' || c.g === 'sundress') {
+        drapeFolds += '<g opacity="0.3">' +
+          '<path d="M125 ' + (wY + 4) + ' Q115 ' + ((wY + hemY)/2) + ' 96 ' + hemY + ' Q110 ' + ((wY + hemY)/2) + ' 133 ' + (wY + 4) + ' Z" fill="#000000"/>' +
+          '<path d="M144 ' + (wY + 4) + ' Q140 ' + ((wY + hemY)/2) + ' 134 ' + hemY + ' Q150 ' + ((wY + hemY)/2) + ' 154 ' + (wY + 4) + ' Z" fill="#FFFFFF"/>' +
+          '<path d="M174 ' + (wY + 4) + ' Q184 ' + ((wY + hemY)/2) + ' 204 ' + hemY + ' Q190 ' + ((wY + hemY)/2) + ' 166 ' + (wY + 4) + ' Z" fill="#000000"/>' +
+          '<path d="M154 ' + (wY + 4) + ' Q160 ' + ((wY + hemY)/2) + ' 168 ' + hemY + ' Q162 ' + ((wY + hemY)/2) + ' 148 ' + (wY + 4) + ' Z" fill="#FFFFFF"/>' +
+          '</g>';
+      } else if (c.g === 'kurti') {
+        drapeFolds += '<g opacity="0.22">' +
+          '<path d="M128 ' + (wY + 8) + ' L125 ' + (hemY - 8) + ' L132 ' + (hemY - 8) + ' L134 ' + (wY + 8) + ' Z" fill="#000000"/>' +
+          '<path d="M166 ' + (wY + 8) + ' L169 ' + (hemY - 8) + ' L175 ' + (hemY - 8) + ' L172 ' + (wY + 8) + ' Z" fill="#000000"/>' +
+          '</g>';
+      }
+    }
+
     return '<svg viewBox="0 0 300 440" role="img" aria-label="Bespoke dress sketch for ' + GNAME[c.g] + '">' +
       defs +
-      '<ellipse cx="150" cy="428" rx="88" ry="6" fill="' + col.shadow + '"/>' +
+      mannequin +
+      '<ellipse cx="150" cy="428" rx="' + (isReal ? '96' : '88') + '" ry="' + (isReal ? '8' : '6') + '" fill="' + col.shadow + '"/>' +
+      (isReal ? '<ellipse cx="150" cy="428" rx="55" ry="4" fill="rgba(0,0,0,0.18)"/>' : '') +
       s +
+      drapeFolds +
       '</svg>';
   }
 
   function cfg() {
     return {
       g: st.g,
-      hex: FABRICS[st.fabric].h,
+      hex: st.customHex || FABRICS[st.fabric].h,
+      material: st.material,
       pattern: st.pattern,
       fit: st.fit,
-      opts: st.opts[st.g]
+      opts: st.opts[st.g],
+      viewMode: st.viewMode || 'sketch'
     };
   }
 
   function drawPreview() {
-    $('#pv').innerHTML = buildDress(cfg(), 'pv');
+    var c = cfg();
+    $('#pv').innerHTML = buildDress(c, 'pv');
     $('#price').textContent = rupee(price());
+
+    // Update Real Cloth Spec Pill
+    var pill = $('#clothPill');
+    var pillText = $('#clothPillText');
+    var pillIcon = $('#clothPillIcon');
+    if (pill && pillText) {
+      if (st.viewMode === 'realistic') {
+        pill.style.display = 'inline-flex';
+        var descMap = {
+          cotton: ['🧵', '100% Mulmul Cotton Slub Weave · Matte Natural Texture & Soft Twirl'],
+          georgette: ['🪡', 'Fine Flowy Georgette Crepe Weave · Light Translucent Flutes'],
+          silk: ['✨', 'Mulberry Silk Satin Sheen · Specular Luster & Fluid Silhouette'],
+          organza: ['🌸', 'Crisp Sheer Organza Weave · Ethereal Gloss & Sculpted Volume']
+        };
+        var desc = descMap[st.material] || ['🧵', 'Tailored Boutique Fabric Weave'];
+        if (pillIcon) pillIcon.textContent = desc[0];
+        pillText.textContent = desc[1];
+      } else {
+        pill.style.display = 'none';
+      }
+    }
+
     if (typeof updateWaContext === 'function') updateWaContext();
   }
 
@@ -1068,6 +1288,13 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       'Address: ' + (f.address || '(Address)'),
       '----------------------------------------'
     ];
+
+    if (st.refImage) {
+      out.push('📷 *Inspiration Photo Uploaded:* ' + (st.refImage.name || 'Reference Attached'));
+      if (st.customHex) out.push('   *Custom Color Applied:* ' + st.customHex);
+      if (st.refCustomNotes) out.push('   *Customer Notes on Photo:* ' + st.refCustomNotes);
+      out.push('----------------------------------------');
+    }
 
     st.cart.forEach(function (it, i) {
       out.push((i + 1) + '. *' + it.title + '* (' + it.design + ')');
@@ -1288,12 +1515,12 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     var q = (questionText || ($('#waCustomMsg') ? $('#waCustomMsg').value.trim() : '')).trim();
     if (!q) q = 'Hi, I need styling & sizing guidance for this dress!';
     var g = GNAME[st.g] || st.g;
-    var c = FABRICS[st.fabric] ? FABRICS[st.fabric].n : '';
+    var c = st.customHex ? ('Extracted Shade (' + st.customHex + ')') : (FABRICS[st.fabric] ? FABRICS[st.fabric].n : '');
     var pr = rupee(price());
     var o = st.opts[st.g];
     var optsStr = OPTS[st.g] ? OPTS[st.g].map(function(d) { return d.label + ': ' + lbl(d.ch, o[d.k]); }).join(', ') : '';
 
-    var msg = [
+    var msgParts = [
       '🌸 *Customer Query - PehnoApni Girls Atelier*',
       'Question: ' + q,
       '',
@@ -1302,12 +1529,25 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       '• Color & Fabric: ' + c + ' (' + lbl(MATERIALS, st.material) + ')',
       '• Styling Options: ' + optsStr,
       '• Fit: ' + lbl(FITS, st.fit),
-      '• Estimated Price: ' + pr,
-      '',
-      'Please reply with guidance and fabric details!'
-    ].join('\n');
+      '• View Mode: ' + (st.viewMode === 'realistic' ? 'Real Cloth Drape' : 'Fashion Sketch'),
+      '• Estimated Price: ' + pr
+    ];
 
-    Tracker.log('wa_query', { question: q, garment: g, color: c, price: price() });
+    if (st.refImage) {
+      msgParts.push('', '📷 *Inspiration Photo Uploaded in Studio:* ' + (st.refImage.name || 'Yes'));
+      if (st.customHex) msgParts.push('• Custom Color Extracted: ' + st.customHex);
+      if (st.refCustomNotes) msgParts.push('• Customer Notes on Photo: ' + st.refCustomNotes);
+    }
+
+    if (st.chatAttachment) {
+      msgParts.push('', '📎 *Customer Attached Photo for Stylist:* ' + st.chatAttachment.name);
+      msgParts.push('*(Note to Masterji: I am sending this photo directly in this chat!)*');
+    }
+
+    msgParts.push('', 'Please reply with guidance and fabric details!');
+    var msg = msgParts.join('\n');
+
+    Tracker.log('wa_query', { question: q, garment: g, color: c, price: price(), hasAttachment: !!st.chatAttachment });
 
     var phone = WHATSAPP_NUMBER || prompt('Enter your WhatsApp phone number to send query (e.g. 919876543210):', '919876543210');
     if (phone) {
@@ -1427,12 +1667,196 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     }
   });
 
+  /* ---------- View Mode Switcher (Sketch vs Real Cloth Drape) ---------- */
+  $('#tabSketch').addEventListener('click', function() {
+    st.viewMode = 'sketch';
+    $('#tabSketch').classList.add('active');
+    $('#tabRealistic').classList.remove('active');
+    drawPreview();
+    Tracker.log('view_mode_changed', { mode: 'sketch' });
+  });
+
+  $('#tabRealistic').addEventListener('click', function() {
+    st.viewMode = 'realistic';
+    $('#tabRealistic').classList.add('active');
+    $('#tabSketch').classList.remove('active');
+    drawPreview();
+    Tracker.log('view_mode_changed', { mode: 'realistic' });
+  });
+
+  /* ---------- Inspiration Image Upload & Palette Extraction ---------- */
+  function extractColorsFromImage(img) {
+    try {
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+      var w = 60, h = 60;
+      canvas.width = w;
+      canvas.height = h;
+      ctx.drawImage(img, 0, 0, w, h);
+      var imgData = ctx.getImageData(0, 0, w, h).data;
+      var colorBuckets = {};
+
+      for (var i = 0; i < imgData.length; i += 16) {
+        var r = imgData[i], g = imgData[i + 1], b = imgData[i + 2], a = imgData[i + 3];
+        if (a < 128) continue;
+        var lum = 0.299 * r + 0.587 * g + 0.114 * b;
+        if (lum > 240 || lum < 20) continue;
+        
+        var qr = Math.round(r / 28) * 28;
+        var qg = Math.round(g / 28) * 28;
+        var qb = Math.round(b / 28) * 28;
+        var key = qr + ',' + qg + ',' + qb;
+        colorBuckets[key] = (colorBuckets[key] || 0) + 1;
+      }
+
+      var sorted = Object.keys(colorBuckets).sort(function(a, b) {
+        return colorBuckets[b] - colorBuckets[a];
+      });
+
+      var palette = [];
+      for (var k = 0; k < sorted.length && palette.length < 4; k++) {
+        var rgb = sorted[k].split(',').map(Number);
+        var hex = '#' + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1).toUpperCase();
+        palette.push(hex);
+      }
+
+      if (!palette.length) palette = ['#F4A7BB', '#C5B4E3', '#F7B7A3', '#9BBBA2'];
+      st.refImage.palette = palette;
+      renderExtractedPalette(palette);
+    } catch(e) {
+      console.warn('Canvas palette extraction error:', e);
+    }
+  }
+
+  function renderExtractedPalette(palette) {
+    var container = $('#refColorChips');
+    if (!container) return;
+    container.innerHTML = palette.map(function(hex) {
+      return '<button type="button" class="ref-col-chip" data-hex="' + hex + '" style="background:' + hex + ';" title="Apply ' + hex + ' to dress">' +
+        '<span style="font-size:.7rem; font-weight:700; background:rgba(0,0,0,.45); color:#fff; padding:1px 5px; border-radius:4px;">' + hex + '</span>' +
+      '</button>';
+    }).join('');
+
+    $$('.ref-col-chip', container).forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        var hex = chip.getAttribute('data-hex');
+        st.customHex = hex;
+        $('#fabName').textContent = 'Extracted Shade (' + hex + ')';
+        $$('input[name="fabric"]').forEach(function(radio) { radio.checked = false; });
+        drawPreview();
+        Tracker.log('color_applied_from_photo', { hex: hex });
+      });
+    });
+
+    if (palette.length > 0) {
+      st.customHex = palette[0];
+      $('#fabName').textContent = 'Extracted Shade (' + palette[0] + ')';
+      $$('input[name="fabric"]').forEach(function(radio) { radio.checked = false; });
+      drawPreview();
+    }
+  }
+
+  function handleInspirationFile(file) {
+    if (!file || !file.type.match(/^image\//)) return;
+    var reader = new FileReader();
+    reader.onload = function(evt) {
+      var dataUrl = evt.target.result;
+      st.refImage = {
+        name: file.name || 'Inspiration Dress Photo',
+        dataUrl: dataUrl,
+        palette: []
+      };
+
+      var imgEl = $('#refCardImg');
+      var nameEl = $('#refCardName');
+      var card = $('#uploadedRefCard');
+      if (imgEl) imgEl.src = dataUrl;
+      if (nameEl) nameEl.textContent = file.name || 'Inspiration Photo';
+      if (card) card.style.display = 'block';
+
+      st.viewMode = 'realistic';
+      $('#tabRealistic').classList.add('active');
+      $('#tabSketch').classList.remove('active');
+
+      var img = new Image();
+      img.onload = function() {
+        extractColorsFromImage(img);
+      };
+      img.src = dataUrl;
+
+      Tracker.log('inspiration_image_uploaded', { name: file.name, size: file.size });
+      save();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  $('#btnSnapPhoto').addEventListener('click', function() {
+    $('#cameraInput').click();
+  });
+
+  $('#btnUploadPhoto').addEventListener('click', function() {
+    $('#galleryInput').click();
+  });
+
+  $('#cameraInput').addEventListener('change', function(e) {
+    var f = e.target.files && e.target.files[0];
+    if (f) handleInspirationFile(f);
+  });
+
+  $('#galleryInput').addEventListener('change', function(e) {
+    var f = e.target.files && e.target.files[0];
+    if (f) handleInspirationFile(f);
+  });
+
+  $('#removeRefCardBtn').addEventListener('click', function() {
+    st.refImage = null;
+    st.customHex = null;
+    st.refCustomNotes = '';
+    $('#refCardImg').src = '';
+    $('#uploadedRefCard').style.display = 'none';
+    if ($('#refCustomNotes')) $('#refCustomNotes').value = '';
+    $('#fabName').textContent = FABRICS[st.fabric].n;
+    var defRadio = $('#fb-' + st.fabric);
+    if (defRadio) defRadio.checked = true;
+    drawPreview();
+    save();
+  });
+
+  if ($('#refCustomNotes')) {
+    $('#refCustomNotes').addEventListener('input', function(e) {
+      st.refCustomNotes = e.target.value;
+      save();
+    });
+  }
+
+  /* ---------- Chat Image Attachment in WhatsApp Popup ---------- */
+  $('#waChatImageInput').addEventListener('change', function(e) {
+    var file = e.target.files && e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(evt) {
+      var dataUrl = evt.target.result;
+      st.chatAttachment = { name: file.name, dataUrl: dataUrl };
+      $('#waThumbImg').src = dataUrl;
+      $('#waAttachedPreview').style.display = 'inline-flex';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  $('#removeWaAttachBtn').addEventListener('click', function() {
+    st.chatAttachment = null;
+    $('#waChatImageInput').value = '';
+    $('#waAttachedPreview').style.display = 'none';
+    $('#waThumbImg').src = '';
+  });
+
   /* ---------- Storage & Init ---------- */
   function save() {
     try {
       localStorage.setItem('pehnoapni_girls.v1', JSON.stringify({
         g: st.g, fabric: st.fabric, material: st.material, pattern: st.pattern,
-        fit: st.fit, opts: st.opts, method: st.method, vals: st.vals, cart: st.cart, form: st.form
+        fit: st.fit, opts: st.opts, method: st.method, vals: st.vals, cart: st.cart, form: st.form,
+        viewMode: st.viewMode
       }));
     } catch (e) {}
   }
@@ -1447,6 +1871,16 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       if (PRICES.pattern[s.pattern] !== undefined) st.pattern = s.pattern;
       if (s.fit) st.fit = s.fit;
       if (s.method) st.method = s.method;
+      if (s.viewMode) {
+        st.viewMode = s.viewMode;
+        if (st.viewMode === 'realistic') {
+          $('#tabRealistic').classList.add('active');
+          $('#tabSketch').classList.remove('active');
+        } else {
+          $('#tabSketch').classList.add('active');
+          $('#tabRealistic').classList.remove('active');
+        }
+      }
       if (s.opts && s.opts[st.g]) {
         OPTS[st.g].forEach(function (o) {
           if (s.opts[st.g][o.k]) st.opts[st.g][o.k] = s.opts[st.g][o.k];
