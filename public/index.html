@@ -163,6 +163,54 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   .item .th svg { width: 58px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Floating WhatsApp Query & Chat Button */
+.wa-float-wrap { position: fixed; bottom: 22px; right: 22px; z-index: 1000; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.wa-float { background: #25D366; color: #FFFFFF; border-radius: 999px; padding: 12px 20px; display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: .95rem; box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45); cursor: pointer; border: 0; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+.wa-float:hover { transform: scale(1.05); box-shadow: 0 12px 32px rgba(37, 211, 102, 0.6); }
+.wa-badge { position: absolute; top: -3px; right: -3px; width: 18px; height: 18px; background: #FF3B30; color: #fff; font-size: 10px; font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; }
+
+/* WhatsApp Query Card / Popup */
+.wa-popup { width: 330px; background: var(--surface); border: 2px solid var(--line); border-radius: 18px; box-shadow: 0 20px 50px -10px rgba(44, 24, 38, 0.3); overflow: hidden; display: none; flex-direction: column; animation: slideUp .25s ease-out; }
+.wa-popup.open { display: flex; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.wa-pheader { background: #075E54; color: #fff; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; }
+.wa-pheader h4 { margin: 0; font-size: .98rem; font-family: var(--body); font-weight: 700; color: #fff; }
+.wa-pheader p { margin: 2px 0 0; font-size: .78rem; opacity: .88; color: #E8F5E9; }
+.wa-pheader button { background: none; border: 0; color: #fff; font-size: 1.3rem; cursor: pointer; padding: 0; line-height: 1; }
+.wa-pbody { padding: 14px; display: flex; flex-direction: column; gap: 10px; max-height: 420px; overflow-y: auto; }
+.wa-curr-tag { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 8px 10px; border-radius: 8px; font-size: .8rem; color: var(--fg); line-height: 1.4; }
+.wa-chips { display: flex; flex-direction: column; gap: 6px; }
+.wa-chip { text-align: left; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 11px; font-size: .83rem; cursor: pointer; transition: all .15s; font-family: var(--body); color: var(--fg); font-weight: 500; }
+.wa-chip:hover { border-color: var(--accent); background: var(--accent-soft); }
+.wa-input-wrap { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.wa-input-wrap textarea { width: 100%; border: 1.5px solid var(--line); border-radius: 8px; padding: 8px 10px; font-family: var(--body); font-size: .86rem; resize: none; background: var(--surface); color: var(--fg); }
+.wa-input-wrap textarea:focus { outline: 2px solid var(--accent); }
+.wa-send-btn { background: #25D366; color: #fff; font-weight: 700; font-size: .92rem; border: 0; border-radius: 8px; padding: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: opacity .15s; font-family: var(--body); }
+.wa-send-btn:hover { opacity: .92; }
+
+/* Analytics Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(20, 10, 18, 0.68); backdrop-filter: blur(4px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px; }
+.modal-overlay.open { display: flex; }
+.modal-card { width: min(840px, 95vw); max-height: 90vh; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 24px 60px rgba(0,0,0,0.3); display: flex; flex-direction: column; overflow: hidden; animation: zoomIn .2s ease-out; }
+@keyframes zoomIn { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: scale(1); } }
+.modal-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--line); background: var(--bg); }
+.modal-head h3 { margin: 0; font-size: 1.25rem; font-family: var(--display); color: var(--fg); font-weight: 700; }
+.modal-head button { background: none; border: 0; color: var(--muted); font-size: 1.4rem; cursor: pointer; padding: 0; line-height: 1; }
+.modal-body { padding: 20px 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
+.stat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 640px) { .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.stat-box { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; text-align: center; }
+.stat-box .num { font: 700 1.7rem var(--display); color: var(--accent); line-height: 1.1; }
+.stat-box .lbl { font-size: .73rem; text-transform: uppercase; color: var(--muted); font-weight: 600; letter-spacing: .05em; margin-top: 4px; }
+.chart-bar-wrap { display: flex; flex-direction: column; gap: 8px; }
+.chart-bar-item { display: grid; grid-template-columns: 140px minmax(0, 1fr) 45px; gap: 10px; align-items: center; font-size: .86rem; }
+.chart-fill-bg { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.chart-fill { height: 100%; background: var(--accent); border-radius: 999px; transition: width .4s; }
+.event-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+.event-table th { text-align: left; padding: 8px 10px; background: var(--bg); color: var(--muted); border-bottom: 1px solid var(--line); font-weight: 600; font-size: .74rem; text-transform: uppercase; }
+.event-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); color: var(--fg); }
+.modal-footer { padding: 14px 24px; border-top: 1px solid var(--line); background: var(--bg); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
 </style>
 </head>
 <body>
@@ -177,6 +225,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       <a href="#how">How it Works</a>
       <a href="#faq">Sizing & FAQ</a>
       <a href="#order">Your Bag<span id="cartCount">0</span></a>
+      <button class="linkbtn" id="openAnalyticsBtn" type="button" style="font-size: .88rem; color: var(--accent); display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft);">📊 Insights</button>
     </nav>
   </header>
 
@@ -204,6 +253,10 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
         </button>
       </div>
       <p class="added" id="added" role="status"></p>
+      <button class="btn alt" id="askDressHelpBtn" type="button" style="width: 100%; margin-top: 10px; font-size: .88rem; padding: 10px 14px; border-radius: 999px;">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        Need Styling Help? Ask on WhatsApp
+      </button>
     </div>
     <div id="panel"></div>
   </section>
@@ -248,7 +301,111 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     <details class="faq"><summary>How long does custom stitching take?</summary><p>Our boutique dressmakers take <span data-lead></span> to cut and stitch your custom garment. Express options are available on request.</p></details>
   </section>
 
-  <footer>🌸 PehnoApni Girls Atelier · Bespoke Twirl Dresses, Anarkalis & Sundresses Stitched For You</footer>
+  <footer>
+    <p>🌸 PehnoApni Girls Atelier · Bespoke Twirl Dresses, Anarkalis, Kurtis & Sundresses Stitched For You</p>
+    <p style="margin-top:6px; font-size:.82rem;"><button class="linkbtn" id="openAnalyticsFooterBtn" type="button" style="color:var(--muted);">📊 Owner Analytics Dashboard</button></p>
+  </footer>
+</div>
+
+<!-- Floating WhatsApp Query Widget -->
+<div class="wa-float-wrap">
+  <div class="wa-popup" id="waPopup">
+    <div class="wa-pheader">
+      <div>
+        <h4>PehnoApni Designer Help</h4>
+        <p>Online now · Instant reply on WhatsApp</p>
+      </div>
+      <button type="button" id="closeWaPopup" aria-label="Close">&times;</button>
+    </div>
+    <div class="wa-pbody">
+      <div class="wa-curr-tag" id="waCurrentContext">
+        <!-- Populated dynamically with current garment & options -->
+      </div>
+      <p style="margin:0; font-size:.82rem; color:var(--muted); font-weight:600;">Tap a quick question or type below:</p>
+      <div class="wa-chips">
+        <button type="button" class="wa-chip" data-q="Hi, can you guide me with taking my measurements for this dress?">📏 Help me measure my size</button>
+        <button type="button" class="wa-chip" data-q="Can I send my own fabric or request custom hand-embroidery?">🧵 Can I send my own fabric?</button>
+        <button type="button" class="wa-chip" data-q="What is the fastest delivery date if I order this dress today?">⚡ Urgent delivery query</button>
+        <button type="button" class="wa-chip" data-q="I want a custom neck or sleeve variation not shown here. Can you stitch it?">✨ Custom neckline / styling request</button>
+      </div>
+      <div class="wa-input-wrap">
+        <textarea id="waCustomMsg" rows="2" placeholder="Or type your specific question here..."></textarea>
+        <button type="button" class="wa-send-btn" id="waSendQueryBtn">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          Ask on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+  <button class="wa-float" id="waFloatBtn" type="button" aria-label="Ask on WhatsApp">
+    <div class="wa-badge">1</div>
+    <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+    <span>Chat with Stylist</span>
+  </button>
+</div>
+
+<!-- Studio Analytics & Creation Tracking Modal -->
+<div class="modal-overlay" id="analyticsModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div>
+        <h3>📊 Atelier Visitor & Creation Analytics</h3>
+        <p style="margin:2px 0 0; font-size:.82rem; color:var(--muted);">Real-time tracking of visitor dress customizations, popular cuts, and conversion funnel.</p>
+      </div>
+      <button type="button" id="closeAnalyticsBtn" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="stat-grid">
+        <div class="stat-box"><div class="num" id="anTotalVisitors">0</div><div class="lbl">Unique Visitors</div></div>
+        <div class="stat-box"><div class="num" id="anTotalDesigns">0</div><div class="lbl">Customization Actions</div></div>
+        <div class="stat-box"><div class="num" id="anAddedToCart">0</div><div class="lbl">Added to Bag</div></div>
+        <div class="stat-box"><div class="num" id="anInquiries">0</div><div class="lbl">WhatsApp Queries</div></div>
+      </div>
+
+      <div>
+        <h4 style="font-size:.95rem; margin:0 0 10px; color:var(--fg); font-weight:700;">Customer Creation Funnel</h4>
+        <div class="chart-bar-wrap" id="anFunnelBars"></div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:18px;">
+        <div>
+          <h4 style="font-size:.92rem; margin:0 0 10px; color:var(--fg); font-weight:700;">Top Garment Silhouettes</h4>
+          <div class="chart-bar-wrap" id="anGarmentBars"></div>
+        </div>
+        <div>
+          <h4 style="font-size:.92rem; margin:0 0 10px; color:var(--fg); font-weight:700;">Top Fabric Colors</h4>
+          <div class="chart-bar-wrap" id="anColorBars"></div>
+        </div>
+      </div>
+
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h4 style="font-size:.92rem; margin:0; color:var(--fg); font-weight:700;">Recent Live Visitor Events</h4>
+          <span style="font-size:.78rem; color:var(--muted);">Latest visitor actions captured</span>
+        </div>
+        <div style="max-height:200px; overflow-y:auto; border:1px solid var(--line); border-radius:10px;">
+          <table class="event-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Visitor</th>
+                <th>Action</th>
+                <th>Garment / Option</th>
+              </tr>
+            </thead>
+            <tbody id="anEventStreamBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <span style="font-size:.82rem; color:var(--muted);">💡 All events are recorded in real-time. Connect a Google Sheet webhook anytime.</span>
+      <div style="display:flex; gap:8px;">
+        <button class="btn alt" id="exportCsvBtn" type="button" style="font-size:.85rem; padding:8px 16px;">📥 Export CSV Report</button>
+        <button class="btn alt" id="clearDataBtn" type="button" style="font-size:.85rem; padding:8px 14px; color:var(--warn); border-color:var(--warn);">Clear Data</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -258,7 +415,8 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
   /* ---------- Settings & Pricing ---------- */
-  var WHATSAPP_NUMBER = '';          /* your whatsapp number, e.g. '919876543210' */
+  var WHATSAPP_NUMBER = '+918383097466'; /* Put your WhatsApp number here (country code + number, digits only) */
+  var ANALYTICS_WEBHOOK_URL = '';       /* Optional: Paste a Google Sheet or Cloudflare Worker webhook URL here */
   var LEAD_TIME = '5 to 7 days';
   var PRICES = {
     base: { aline: 1699, anarkali: 2499, sundress: 1899, lehenga: 2899, kurti: 1299 },
@@ -718,6 +876,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   function drawPreview() {
     $('#pv').innerHTML = buildDress(cfg(), 'pv');
     $('#price').textContent = rupee(price());
+    if (typeof updateWaContext === 'function') updateWaContext();
   }
 
   /* ---------- Builder Panel & Choices ---------- */
@@ -788,24 +947,31 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     if (n === 'g') {
       st.g = v;
       renderPanel();
+      Tracker.log('garment_changed', { garment: GNAME[v] || v });
     } else if (n === 'fabric') {
       st.fabric = Number(v);
       $('#fabName').textContent = FABRICS[st.fabric].n;
+      Tracker.log('color_changed', { color: FABRICS[st.fabric].n });
     } else if (n === 'pattern' || n === 'material') {
       st[n] = v;
+      Tracker.log('material_changed', { field: n, value: v });
     } else if (n === 'fit') {
       st.fit = v;
       MEAS[st.g].forEach(refreshRow);
+      Tracker.log('fit_changed', { fit: st.fit });
     } else if (n === 'method') {
       st.method = v;
       renderMeas();
+      Tracker.log('measure_method', { method: st.method });
     } else if (n.indexOf('o-') === 0) {
       st.opts[st.g][n.slice(2)] = v;
+      Tracker.log('style_option_changed', { option: n.slice(2), value: v });
     }
     drawPreview();
     save();
   });
 
+  var measInputTimer = null;
   $('#panel').addEventListener('input', function (e) {
     var row = e.target.closest('.mrow');
     if (!row) return;
@@ -813,6 +979,10 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     st.vals[id] = parseIn(e.target.value);
     refreshRow(MEAS[st.g].filter(function (m) { return m[0] === id; })[0]);
     save();
+    clearTimeout(measInputTimer);
+    measInputTimer = setTimeout(function() {
+      Tracker.log('measurement_typed', { field: id, value: st.vals[id] });
+    }, 1200);
   });
 
   $('#panel').addEventListener('keydown', function (e) {
@@ -843,6 +1013,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       missing: missing
     });
 
+    Tracker.log('added_to_cart', { garment: GNAME[st.g], price: price() });
     save();
     renderCart();
     var msg = $('#added');
@@ -884,6 +1055,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     var b = e.target.closest('[data-rm]');
     if (!b) return;
     st.cart.splice(Number(b.getAttribute('data-rm')), 1);
+    Tracker.log('added_to_cart', { garment: GNAME[st.g], price: price() });
     save();
     renderCart();
   });
@@ -949,6 +1121,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       e.preventDefault();
       s.textContent = bad;
     } else {
+      Tracker.log('wa_order_initiated', { items: st.cart.length, total: total() });
       s.textContent = 'Opening WhatsApp. Press send to submit your order to our atelier!';
     }
   });
@@ -966,6 +1139,293 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   });
 
   $('#add').addEventListener('click', addToCart);
+
+  /* ---------- Analytics & WhatsApp Query System ---------- */
+  var Tracker = (function() {
+    var VID_KEY = 'pehnoapni_vid';
+    var EVENTS_KEY = 'pehnoapni_events_log';
+    
+    function getVisitorId() {
+      var id = localStorage.getItem(VID_KEY);
+      if (!id) {
+        id = 'girl_' + Math.random().toString(36).substring(2, 8);
+        localStorage.setItem(VID_KEY, id);
+      }
+      return id;
+    }
+
+    function getEvents() {
+      try {
+        return JSON.parse(localStorage.getItem(EVENTS_KEY) || '[]');
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveEvents(evts) {
+      try {
+        if (evts.length > 500) evts = evts.slice(-500);
+        localStorage.setItem(EVENTS_KEY, JSON.stringify(evts));
+      } catch (e) {}
+    }
+
+    function log(type, payload) {
+      var evt = {
+        id: Date.now() + '_' + Math.random().toString(36).substring(2, 6),
+        time: new Date().toISOString(),
+        timeStr: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        vid: getVisitorId(),
+        type: type,
+        garment: GNAME[st.g] || st.g,
+        color: FABRICS[st.fabric] ? FABRICS[st.fabric].n : '',
+        material: st.material,
+        fit: st.fit,
+        price: price(),
+        data: payload || {}
+      };
+
+      var evts = getEvents();
+      evts.push(evt);
+      saveEvents(evts);
+
+      if (ANALYTICS_WEBHOOK_URL) {
+        try {
+          fetch(ANALYTICS_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(evt)
+          }).catch(function() {});
+        } catch (e) {}
+      }
+
+      return evt;
+    }
+
+    function getStats() {
+      var evts = getEvents();
+      var visitors = {};
+      var customActions = 0;
+      var addedCart = 0;
+      var queries = 0;
+      var measurements = 0;
+      var garmentCounts = {};
+      var colorCounts = {};
+
+      evts.forEach(function(e) {
+        visitors[e.vid] = true;
+        if (e.type === 'style_option_changed' || e.type === 'garment_changed' || e.type === 'color_changed' || e.type === 'material_changed') customActions++;
+        if (e.type === 'added_to_cart') addedCart++;
+        if (e.type === 'wa_query' || e.type === 'wa_order_initiated') queries++;
+        if (e.type === 'measurement_typed') measurements++;
+
+        if (e.garment) garmentCounts[e.garment] = (garmentCounts[e.garment] || 0) + 1;
+        if (e.color) colorCounts[e.color] = (colorCounts[e.color] || 0) + 1;
+      });
+
+      return {
+        totalVisitors: Math.max(Object.keys(visitors).length, 1),
+        totalDesigns: customActions,
+        addedToCart: addedCart,
+        inquiries: queries,
+        measurements: measurements,
+        garments: garmentCounts,
+        colors: colorCounts,
+        recent: evts.slice(-25).reverse()
+      };
+    }
+
+    function exportCSV() {
+      var evts = getEvents();
+      if (!evts.length) {
+        alert('No visitor events recorded yet.');
+        return;
+      }
+      var headers = ['Timestamp', 'Visitor_ID', 'Event_Type', 'Garment', 'Color', 'Material', 'Fit', 'Price', 'Details'];
+      var rows = evts.map(function(e) {
+        return [
+          e.time,
+          e.vid,
+          e.type,
+          '"' + (e.garment || '').replace(/"/g, '""') + '"',
+          '"' + (e.color || '').replace(/"/g, '""') + '"',
+          e.material || '',
+          e.fit || '',
+          e.price || 0,
+          '"' + (JSON.stringify(e.data) || '').replace(/"/g, '""') + '"'
+        ].join(',');
+      });
+      var csv = [headers.join(',')].concat(rows).join('\n');
+      var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      var link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'pehnoapni_dress_creation_analytics_' + Date.now() + '.csv';
+      link.click();
+    }
+
+    function clear() {
+      localStorage.removeItem(EVENTS_KEY);
+    }
+
+    return {
+      log: log,
+      getStats: getStats,
+      exportCSV: exportCSV,
+      clear: clear,
+      getVisitorId: getVisitorId
+    };
+  })();
+
+  function updateWaContext() {
+    var g = GNAME[st.g] || st.g;
+    var c = FABRICS[st.fabric] ? FABRICS[st.fabric].n : '';
+    var p = rupee(price());
+    var el = $('#waCurrentContext');
+    if (el) el.innerHTML = '👗 <b>Currently Styling:</b> ' + g + ' in ' + c + ' (' + p + ')';
+  }
+
+  function sendWaQuery(questionText) {
+    var q = (questionText || ($('#waCustomMsg') ? $('#waCustomMsg').value.trim() : '')).trim();
+    if (!q) q = 'Hi, I need styling & sizing guidance for this dress!';
+    var g = GNAME[st.g] || st.g;
+    var c = FABRICS[st.fabric] ? FABRICS[st.fabric].n : '';
+    var pr = rupee(price());
+    var o = st.opts[st.g];
+    var optsStr = OPTS[st.g] ? OPTS[st.g].map(function(d) { return d.label + ': ' + lbl(d.ch, o[d.k]); }).join(', ') : '';
+
+    var msg = [
+      '🌸 *Customer Query - PehnoApni Girls Atelier*',
+      'Question: ' + q,
+      '',
+      '👗 *Dress Details Currently on Screen:*',
+      '• Silhouette: ' + g,
+      '• Color & Fabric: ' + c + ' (' + lbl(MATERIALS, st.material) + ')',
+      '• Styling Options: ' + optsStr,
+      '• Fit: ' + lbl(FITS, st.fit),
+      '• Estimated Price: ' + pr,
+      '',
+      'Please reply with guidance and fabric details!'
+    ].join('\n');
+
+    Tracker.log('wa_query', { question: q, garment: g, color: c, price: price() });
+
+    var phone = WHATSAPP_NUMBER || prompt('Enter your WhatsApp phone number to send query (e.g. 919876543210):', '919876543210');
+    if (phone) {
+      window.open('https://wa.me/' + phone.replace(/\D/g, '') + '?text=' + encodeURIComponent(msg), '_blank');
+    }
+  }
+
+  function renderAnalyticsModal() {
+    var stats = Tracker.getStats();
+    $('#anTotalVisitors').textContent = stats.totalVisitors;
+    $('#anTotalDesigns').textContent = stats.totalDesigns;
+    $('#anAddedToCart').textContent = stats.addedToCart;
+    $('#anInquiries').textContent = stats.inquiries;
+
+    // Funnel bars
+    var funnelItems = [
+      ['Visited Atelier', stats.totalVisitors, 100],
+      ['Customized Dress / Switched Styles', stats.totalDesigns, Math.min(100, Math.round((stats.totalDesigns / stats.totalVisitors) * 100))],
+      ['Typed Sizes / Measurements', stats.measurements, Math.min(100, Math.round((stats.measurements / stats.totalVisitors) * 100))],
+      ['Added Dress to Bag', stats.addedToCart, Math.min(100, Math.round((stats.addedToCart / stats.totalVisitors) * 100))],
+      ['Contacted / Inquired on WhatsApp', stats.inquiries, Math.min(100, Math.round((stats.inquiries / stats.totalVisitors) * 100))]
+    ];
+    $('#anFunnelBars').innerHTML = funnelItems.map(function(f) {
+      return '<div class="chart-bar-item"><span style="font-weight:600;">' + f[0] + '</span>' +
+        '<div class="chart-fill-bg"><div class="chart-fill" style="width:' + f[2] + '%;"></div></div>' +
+        '<span style="font-weight:700; text-align:right;">' + f[1] + '</span></div>';
+    }).join('');
+
+    // Garment Bars
+    var gKeys = Object.keys(stats.garments);
+    var maxG = Math.max.apply(null, gKeys.map(function(k) { return stats.garments[k]; }).concat([1]));
+    $('#anGarmentBars').innerHTML = gKeys.length ? gKeys.map(function(k) {
+      var pct = Math.round((stats.garments[k] / maxG) * 100);
+      return '<div class="chart-bar-item"><span>' + k + '</span>' +
+        '<div class="chart-fill-bg"><div class="chart-fill" style="width:' + pct + '%;"></div></div>' +
+        '<span style="font-weight:700; text-align:right;">' + stats.garments[k] + '</span></div>';
+    }).join('') : '<p style="color:var(--muted); font-size:.85rem; margin:0;">No garment activity yet.</p>';
+
+    // Color Bars
+    var cKeys = Object.keys(stats.colors);
+    var maxC = Math.max.apply(null, cKeys.map(function(k) { return stats.colors[k]; }).concat([1]));
+    $('#anColorBars').innerHTML = cKeys.length ? cKeys.map(function(k) {
+      var pct = Math.round((stats.colors[k] / maxC) * 100);
+      return '<div class="chart-bar-item"><span>' + k + '</span>' +
+        '<div class="chart-fill-bg"><div class="chart-fill" style="width:' + pct + '%; background:#D89835;"></div></div>' +
+        '<span style="font-weight:700; text-align:right;">' + stats.colors[k] + '</span></div>';
+    }).join('') : '<p style="color:var(--muted); font-size:.85rem; margin:0;">No color activity yet.</p>';
+
+    // Recent activity stream table
+    var tbody = $('#anEventStreamBody');
+    tbody.innerHTML = stats.recent.length ? stats.recent.map(function(e) {
+      var act = e.type.replace(/_/g, ' ');
+      var detail = e.garment + (e.color ? ' (' + e.color + ')' : '');
+      if (e.data && e.data.question) detail += ' - Q: "' + e.data.question.slice(0, 30) + '..."';
+      return '<tr>' +
+        '<td style="white-space:nowrap; color:var(--muted);">' + e.timeStr + '</td>' +
+        '<td style="font-family:monospace; font-size:.78rem;">' + e.vid + '</td>' +
+        '<td style="text-transform:capitalize; font-weight:600; color:var(--accent);">' + act + '</td>' +
+        '<td>' + detail + '</td>' +
+      '</tr>';
+    }).join('') : '<tr><td colspan="4" style="text-align:center; color:var(--muted);">No visitor activity logged yet.</td></tr>';
+  }
+
+  // WhatsApp Floating Button & Popup Actions
+  $('#waFloatBtn').addEventListener('click', function() {
+    updateWaContext();
+    $('#waPopup').classList.toggle('open');
+  });
+
+  $('#closeWaPopup').addEventListener('click', function() {
+    $('#waPopup').classList.remove('open');
+  });
+
+  $('#askDressHelpBtn').addEventListener('click', function() {
+    updateWaContext();
+    $('#waPopup').classList.add('open');
+    if ($('#waCustomMsg')) $('#waCustomMsg').focus();
+  });
+
+  $$('.wa-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      sendWaQuery(chip.getAttribute('data-q'));
+    });
+  });
+
+  $('#waSendQueryBtn').addEventListener('click', function() {
+    sendWaQuery();
+  });
+
+  // Analytics Modal Actions
+  $('#openAnalyticsBtn').addEventListener('click', function() {
+    renderAnalyticsModal();
+    $('#analyticsModal').classList.add('open');
+  });
+
+  $('#openAnalyticsFooterBtn').addEventListener('click', function() {
+    renderAnalyticsModal();
+    $('#analyticsModal').classList.add('open');
+  });
+
+  $('#closeAnalyticsBtn').addEventListener('click', function() {
+    $('#analyticsModal').classList.remove('open');
+  });
+
+  $('#analyticsModal').addEventListener('click', function(e) {
+    if (e.target === $('#analyticsModal')) $('#analyticsModal').classList.remove('open');
+  });
+
+  $('#exportCsvBtn').addEventListener('click', function() {
+    Tracker.exportCSV();
+  });
+
+  $('#clearDataBtn').addEventListener('click', function() {
+    if (confirm('Clear all logged visitor tracking events?')) {
+      Tracker.clear();
+      renderAnalyticsModal();
+    }
+  });
 
   /* ---------- Storage & Init ---------- */
   function save() {
@@ -1011,6 +1471,10 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   renderPanel();
   drawPreview();
   renderCart();
+  Tracker.log('session_start', {
+    referrer: document.referrer || 'direct',
+    device: window.innerWidth < 768 ? 'mobile' : 'desktop'
+  });
 })();
 </script>
 </body>
