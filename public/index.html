@@ -415,14 +415,14 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
   /* ---------- Settings & Pricing ---------- */
-  var WHATSAPP_NUMBER = '+918383097466'; /* Put your WhatsApp number here (country code + number, digits only) */
+  var WHATSAPP_NUMBER = '919876543210'; /* Put your WhatsApp number here (country code + number, digits only) */
   var ANALYTICS_WEBHOOK_URL = '';       /* Optional: Paste a Google Sheet or Cloudflare Worker webhook URL here */
   var LEAD_TIME = '5 to 7 days';
   var PRICES = {
-    base: { aline: 1699, anarkali: 2499, sundress: 1899, lehenga: 2899, kurti: 1299 },
-    material: { cotton: 0, georgette: 450, silk: 850, organza: 650 },
-    pattern: { solid: 0, floral: 200, polka: 150, booti: 250 },
-    extra: { pocket: 100, belt: 150, ruffleHem: 200, gotaSlits: 150 }
+    base: { kurti: 499, aline: 549, sundress: 579, anarkali: 599, lehenga: 629 },
+    material: { cotton: 0, georgette: 30, silk: 50, organza: 40 },
+    pattern: { solid: 0, floral: 20, polka: 20, booti: 30 },
+    extra: { pocket: 30, belt: 25, ruffleHem: 30, gotaSlits: 25 }
   };
 
   /* Pretty Dresses & Silhouettes for Girls */
@@ -478,36 +478,36 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       { k: 'sleeve', label: 'Sleeves', def: 'puff', ch: [['puff', 'Romantic Puff'], ['flutter', 'Ruffle / Flutter'], ['sleeveless', 'Sleeveless'], ['full', 'Full Bishop Sleeves'], ['cap', 'Cap Sleeves']] },
       { k: 'length', label: 'Dress Length', def: 'knee', ch: [['mini', 'Above Knee'], ['knee', 'Knee Length'], ['midi', 'Calf Midi']] },
       { k: 'waistDetail', label: 'Waist Styling', def: 'bow', ch: [['none', 'Clean Plain'], ['bow', 'Tie-up Bow Sash'], ['belt', 'Fabric Belt']] },
-      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pockets (+₹100)']] }
+      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pockets (+₹30)']] }
     ],
     kurti: [
       { k: 'silhouette', label: 'Kurti Style', def: 'straight', ch: [['straight', 'Straight Cut (Classic Slits)'], ['nyra', 'Nyra Cut (High Slits & Gathers)'], ['peplum', 'Short Peplum Tunic'], ['aline', 'A-Line Flared Kurti']] },
       { k: 'neck', label: 'Neckline', def: 'mandarin', ch: [['mandarin', 'Mandarin Collar & V-Slit'], ['angrakha', 'Angrakha Overlap & Dori Tie'], ['keyhole', 'Keyhole with Potli Button'], ['sweetheart', 'Sweetheart with Gota'], ['round', 'Round Neck & Slit']] },
       { k: 'sleeve', label: 'Sleeve Style', def: 'threeFourth', ch: [['threeFourth', '3/4th with Lace Border'], ['bell', 'Flared Bell Sleeves'], ['puff', 'Puff Sleeves with Cuff'], ['sleeveless', 'Sleeveless with Piping'], ['full', 'Full Churidar Sleeves']] },
       { k: 'length', label: 'Kurti Length', def: 'knee', ch: [['short', 'Hip Length (Short 32")'], ['knee', 'Knee Length (40")'], ['calf', 'Calf Long Kurti (45")']] },
-      { k: 'slits', label: 'Slit Detailing', def: 'gota', ch: [['gota', 'Slits with Gota Patti Trim (+₹150)'], ['plain', 'Clean Plain Slits'], ['frontSlit', 'Center Front Slit']] },
-      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pocket (+₹100)']] }
+      { k: 'slits', label: 'Slit Detailing', def: 'gota', ch: [['gota', 'Slits with Gota Patti Trim (+₹25)'], ['plain', 'Clean Plain Slits'], ['frontSlit', 'Center Front Slit']] },
+      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pocket (+₹30)']] }
     ],
     sundress: [
       { k: 'neck', label: 'Neckline', def: 'square', ch: [['square', 'Square Cut'], ['sweetheart', 'Sweetheart'], ['vneck', 'Soft V-Neck'], ['round', 'Round Neck']] },
       { k: 'sleeve', label: 'Sleeves', def: 'flutter', ch: [['flutter', 'Ruffle / Flutter'], ['puff', 'Puff Sleeves'], ['sleeveless', 'Spaghetti Straps'], ['cap', 'Cap Sleeves']] },
       { k: 'length', label: 'Length & Tiers', def: 'midi', ch: [['knee', '2-Tier Knee'], ['midi', '3-Tier Midi'], ['maxi', 'Floor Maxi']] },
-      { k: 'hemDetail', label: 'Hem Finish', def: 'ruffleHem', ch: [['plain', 'Plain Hem'], ['ruffleHem', 'Ruffle Frill Hem (+₹200)']] },
-      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pockets (+₹100)']] }
+      { k: 'hemDetail', label: 'Hem Finish', def: 'ruffleHem', ch: [['plain', 'Plain Hem'], ['ruffleHem', 'Ruffle Frill Hem (+₹30)']] },
+      { k: 'pocket', label: 'Pockets', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Side Pockets (+₹30)']] }
     ],
     anarkali: [
       { k: 'neck', label: 'Neckline', def: 'sweetheart', ch: [['sweetheart', 'Sweetheart with Zari'], ['round', 'Deep Round'], ['boat', 'Boat Neck'], ['angrakha', 'Cross Angrakha']] },
       { k: 'sleeve', label: 'Sleeves', def: 'full', ch: [['full', 'Churidar Full'], ['puff', 'Puff with Cuff'], ['sleeveless', 'Sleeveless'], ['half', 'Elbow Length']] },
       { k: 'length', label: 'Gown Length', def: 'floor', ch: [['ankle', 'Ankle Length'], ['floor', 'Floor Twirl Gown']] },
       { k: 'waistDetail', label: 'Dori / Latkan', def: 'bow', ch: [['none', 'Clean Seam'], ['bow', 'Side Dori with Latkans']] },
-      { k: 'pocket', label: 'Pockets', def: 'none', ch: [['none', 'No Pockets'], ['yes', 'Hidden Pocket (+₹100)']] }
+      { k: 'pocket', label: 'Pockets', def: 'none', ch: [['none', 'No Pockets'], ['yes', 'Hidden Pocket (+₹30)']] }
     ],
     lehenga: [
       { k: 'neck', label: 'Blouse Neckline', def: 'sweetheart', ch: [['sweetheart', 'Sweetheart'], ['vneck', 'Plunging V'], ['square', 'Square Neck'], ['boat', 'Boat Neck']] },
       { k: 'sleeve', label: 'Blouse Sleeves', def: 'puff', ch: [['puff', 'Princess Puff'], ['sleeveless', 'Sleeveless'], ['elbow', 'Elbow Sleeve'], ['cap', 'Cap Sleeve']] },
       { k: 'skirtFlare', label: 'Skirt Ghera', def: 'flare', ch: [['flare', 'Flared Ghera (4m)'], ['kalidar', 'Kalidar Pleats (6m)']] },
       { k: 'waistDetail', label: 'Skirt Tie', def: 'bow', ch: [['bow', 'Designer Dori & Bow'], ['belt', 'Embroidered Belt']] },
-      { k: 'pocket', label: 'Skirt Pocket', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Skirt Pocket (+₹100)']] }
+      { k: 'pocket', label: 'Skirt Pocket', def: 'yes', ch: [['none', 'No Pockets'], ['yes', 'Hidden Skirt Pocket (+₹30)']] }
     ]
   };
 
@@ -600,7 +600,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     if (o.pocket === 'yes') p += PRICES.extra.pocket;
     if (o.waistDetail === 'bow' || o.waistDetail === 'belt') p += PRICES.extra.belt;
     if (o.hemDetail === 'ruffleHem') p += PRICES.extra.ruffleHem;
-    if (o.slits === 'gota') p += (PRICES.extra.gotaSlits || 150);
+    if (o.slits === 'gota') p += (PRICES.extra.gotaSlits || 25);
     return p;
   }
 
