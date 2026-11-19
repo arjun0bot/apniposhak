@@ -376,7 +376,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     <div id="cart"></div>
     <div class="form">
       <div><label for="fname">Your Name</label><input id="fname" autocomplete="name" placeholder="e.g. Ananya Sharma"></div>
-      <div><label for="fphone">WhatsApp Number</label><input id="fphone" inputmode="tel" autocomplete="tel" placeholder="e.g. 9876543210"></div>
+      <div><label for="fphone">WhatsApp Number</label><input id="fphone" inputmode="tel" autocomplete="tel" placeholder="e.g. 8383097466"></div>
       <div class="full"><label for="faddr">Delivery Address</label><textarea id="faddr" rows="3" autocomplete="street-address" placeholder="House/Flat No., Street, City, Pincode"></textarea></div>
     </div>
     <div class="actions">
@@ -526,7 +526,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
   /* ---------- Settings & Pricing ---------- */
-  var WHATSAPP_NUMBER = '919876543210'; /* Put your WhatsApp number here (country code + number, digits only) */
+  var WHATSAPP_NUMBER = '+918383097466'; /* Put your WhatsApp number here (country code + number, digits only) */
   var ANALYTICS_WEBHOOK_URL = '';       /* Optional: Paste a Google Sheet or Cloudflare Worker webhook URL here */
   var LEAD_TIME = '5 to 7 days';
   var PRICES = {
@@ -1549,7 +1549,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
 
     Tracker.log('wa_query', { question: q, garment: g, color: c, price: price(), hasAttachment: !!st.chatAttachment });
 
-    var phone = WHATSAPP_NUMBER || prompt('Enter your WhatsApp phone number to send query (e.g. 919876543210):', '919876543210');
+    var phone = WHATSAPP_NUMBER || prompt('Enter your WhatsApp phone number to send query (e.g. 9002215440):', '+918383097466');
     if (phone) {
       window.open('https://wa.me/' + phone.replace(/\D/g, '') + '?text=' + encodeURIComponent(msg), '_blank');
     }
