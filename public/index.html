@@ -73,9 +73,12 @@ h3 { font-size: 1.15rem; font-weight: 600; }
 .badge-row span { display: flex; align-items: center; gap: 6px; background: var(--surface); padding: 5px 14px; border-radius: 999px; border: 1px solid var(--line); }
 
 .build { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: 40px; align-items: start; margin-top: 24px; }
-.pvcard { position: sticky; top: 20px; background: var(--surface); border: 2px dashed var(--thread); border-radius: 20px; padding: 18px; box-shadow: 0 12px 36px -12px rgba(212, 66, 125, 0.12); }
+.pvcard { position: sticky; top: 14px; max-height: calc(100vh - 28px); overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: var(--accent) transparent; overscroll-behavior: contain; background: var(--surface); border: 2px dashed var(--thread); border-radius: 20px; padding: 18px; box-shadow: 0 12px 36px -12px rgba(212, 66, 125, 0.12); }
+.pvcard::-webkit-scrollbar { width: 5px; }
+.pvcard::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 999px; }
+.pvcard::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 .pv { display: flex; justify-content: center; background: radial-gradient(circle at 50% 45%, var(--accent-soft) 0%, transparent 75%); border-radius: 14px; padding: 8px; }
-.pv svg { display: block; aspect-ratio: 300 / 440; height: min(58vh, 520px); width: auto; max-width: 100%; filter: drop-shadow(0 8px 18px rgba(44, 24, 38, 0.15)); }
+.pv svg { display: block; aspect-ratio: 300 / 440; height: min(52vh, 480px); width: auto; max-width: 100%; filter: drop-shadow(0 8px 18px rgba(44, 24, 38, 0.15)); }
 .buy { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
 .plabel { font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 .price { font: 700 1.7rem var(--display); font-variant-numeric: tabular-nums; line-height: 1.1; color: var(--fg); }
@@ -148,9 +151,9 @@ details.faq p { margin: 10px 0 0; color: var(--muted); max-width: 66ch; line-hei
 footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-align: center; border-top: 1px solid var(--line); margin-top: 50px; }
 
 @media (max-width: 880px) {
-  .build { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .pvcard { top: env(safe-area-inset-top, 0px); z-index: 5; padding: 14px; border-radius: 0 0 20px 20px; }
-  .pv svg { height: 30vh; }
+  .build { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .pvcard { position: relative !important; top: auto !important; max-height: none !important; overflow: visible !important; z-index: 1; padding: 16px; border-radius: 20px; box-shadow: 0 6px 24px -6px rgba(212, 66, 125, 0.1); margin-bottom: 8px; }
+  .pv svg { height: min(44vh, 370px); }
   .price { font-size: 1.4rem; }
   .btn { padding: 10px 20px; font-size: .92rem; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -246,6 +249,37 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
 .wa-attached-thumb { position: relative; display: flex; align-items: center; gap: 8px; }
 .wa-attached-thumb img { width: 38px; height: 38px; object-fit: cover; border-radius: 8px; border: 2px solid var(--accent); }
 .wa-attached-thumb button { background: var(--warn); color: #fff; border: 0; width: 20px; height: 20px; border-radius: 50%; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; padding: 0; }
+/* WhatsApp Query Image Attachment Picker */
+.wa-image-picker { background: var(--bg); border: 1.5px solid var(--line); border-radius: 12px; padding: 10px; margin-top: 4px; display: flex; flex-direction: column; gap: 8px; }
+.wa-picker-title { font-size: .8rem; font-weight: 700; color: var(--fg); display: flex; align-items: center; justify-content: space-between; }
+.wa-img-options { display: flex; flex-direction: column; gap: 6px; }
+.wa-img-opt { display: flex; align-items: center; gap: 10px; padding: 6px 10px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--surface); cursor: pointer; transition: all .15s; }
+.wa-img-opt:hover { border-color: var(--accent); }
+.wa-img-opt.selected { border-color: var(--accent); background: var(--accent-soft); }
+.wa-img-opt input[type="radio"] { margin: 0; accent-color: var(--accent); }
+.wa-opt-thumb { width: 38px; height: 38px; border-radius: 8px; background: var(--accent-soft); overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid var(--line); }
+.wa-opt-thumb svg { width: 32px; height: auto; }
+.wa-opt-thumb-img { width: 38px; height: 38px; border-radius: 8px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--line); }
+.wa-img-opt div { display: flex; flex-direction: column; min-width: 0; }
+.wa-img-opt strong { font-size: .82rem; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wa-img-opt span { font-size: .71rem; color: var(--muted); }
+
+/* Ready Dress in Real Cloth Fullscreen Showcase Modal */
+.ready-dress-grid { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 24px; align-items: center; }
+@media (max-width: 720px) { .ready-dress-grid { grid-template-columns: 1fr; } }
+.ready-dress-preview { background: radial-gradient(circle at 50% 50%, var(--accent-soft) 0%, var(--surface) 80%); border: 2px dashed var(--accent); border-radius: 18px; padding: 16px; display: flex; justify-content: center; position: relative; }
+.ready-dress-preview svg { width: 100%; max-height: 420px; height: auto; filter: drop-shadow(0 14px 26px rgba(44, 24, 38, 0.2)); }
+.fabric-macro-card { display: flex; align-items: center; gap: 12px; background: var(--bg); border: 1.5px solid var(--line); border-radius: 14px; padding: 12px 14px; margin-top: 14px; }
+.fabric-macro-lens { width: 54px; height: 54px; border-radius: 50%; border: 3px solid var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,0.15); flex-shrink: 0; position: relative; overflow: hidden; }
+.macro-desc strong { display: block; font-size: .88rem; color: var(--fg); font-family: var(--display); }
+.macro-desc p { margin: 2px 0 0; font-size: .78rem; color: var(--muted); line-height: 1.35; }
+.spec-tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.spec-tag { font-size: .78rem; background: var(--surface); border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px; color: var(--fg); font-weight: 500; }
+.spec-tag b { color: var(--accent); }
+
+/* Photo Notice Dialog */
+.photo-notice-box { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 10px 0; }
+.photo-notice-thumb { max-height: 220px; max-width: 100%; border-radius: 14px; border: 2px solid var(--accent); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
 </style>
 </head>
 <body>
@@ -338,13 +372,16 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   <section id="design" class="build" aria-label="Design your dress">
     <div class="pvcard">
       <div class="vmode-tabs">
-        <button class="vtab active" id="tabSketch" type="button">🎨 Fashion Sketch</button>
-        <button class="vtab" id="tabRealistic" type="button">👗 Real Cloth Drape</button>
+        <button class="vtab active" id="tabRealistic" type="button">👗 Real Cloth Drape</button>
+        <button class="vtab" id="tabSketch" type="button">🎨 Fashion Sketch</button>
       </div>
       <div class="pv" id="pv"></div>
-      <div class="cloth-spec-pill" id="clothPill" style="display:none;">
-        <span id="clothPillIcon">🧵</span> <span id="clothPillText">Mulmul Soft Cotton Crepe Drape</span>
+      <div class="cloth-spec-pill" id="clothPill">
+        <span id="clothPillIcon">🧵</span> <span id="clothPillText">100% Mulmul Cotton Slub Weave</span>
       </div>
+      <button class="btn" id="btnShowReadyDress" type="button" style="width: 100%; margin-top: 10px; font-size: .88rem; padding: 11px 16px; border-radius: 999px; background: linear-gradient(135deg, var(--accent) 0%, #b82b60 100%); font-weight: 700; box-shadow: 0 4px 14px rgba(212, 66, 125, 0.3);">
+        ✨ View Ready Dress in Real Cloth
+      </button>
       <div class="buy">
         <div><div class="plabel">Estimated Price</div><div class="price" id="price"></div></div>
         <button class="btn" id="add" type="button">
@@ -353,7 +390,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
         </button>
       </div>
       <p class="added" id="added" role="status"></p>
-      <button class="btn alt" id="askDressHelpBtn" type="button" style="width: 100%; margin-top: 10px; font-size: .88rem; padding: 10px 14px; border-radius: 999px;">
+      <button class="btn alt" id="askDressHelpBtn" type="button" style="width: 100%; margin-top: 8px; font-size: .86rem; padding: 10px 14px; border-radius: 999px;">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
         Need Styling Help? Ask on WhatsApp
       </button>
@@ -376,7 +413,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     <div id="cart"></div>
     <div class="form">
       <div><label for="fname">Your Name</label><input id="fname" autocomplete="name" placeholder="e.g. Ananya Sharma"></div>
-      <div><label for="fphone">WhatsApp Number</label><input id="fphone" inputmode="tel" autocomplete="tel" placeholder="e.g. 8383097466"></div>
+      <div><label for="fphone">WhatsApp Number</label><input id="fphone" inputmode="tel" autocomplete="tel" placeholder="e.g. 9876543210"></div>
       <div class="full"><label for="faddr">Delivery Address</label><textarea id="faddr" rows="3" autocomplete="street-address" placeholder="House/Flat No., Street, City, Pincode"></textarea></div>
     </div>
     <div class="actions">
@@ -428,15 +465,40 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
         <button type="button" class="wa-chip" data-q="What is the fastest delivery date if I order this dress today?">⚡ Urgent delivery query</button>
         <button type="button" class="wa-chip" data-q="I want a custom neck or sleeve variation not shown here. Can you stitch it?">✨ Custom neckline / styling request</button>
       </div>
-      <div class="wa-attach-row">
-        <label class="wa-attach-btn" for="waChatImageInput" title="Attach dress photo, fabric swatch or sketch">
-          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/></svg>
-          <span>Attach Photo / Sketch</span>
-        </label>
-        <input type="file" id="waChatImageInput" accept="image/*" style="display:none;">
-        <div id="waAttachedPreview" class="wa-attached-thumb" style="display:none;">
-          <img id="waThumbImg" src="" alt="Attached photo">
-          <button type="button" id="removeWaAttachBtn" title="Remove attachment">&times;</button>
+      <!-- Attached Image Chooser for Query -->
+      <div class="wa-image-picker" id="waImagePicker">
+        <div class="wa-picker-title">
+          <span>📸 Image attached with query:</span>
+          <span style="font-size:.72rem; color:var(--accent); font-weight:600;">Sends with query</span>
+        </div>
+        <div class="wa-img-options">
+          <label class="wa-img-opt selected" id="optCreatedDress">
+            <input type="radio" name="waAttachChoice" value="created" checked>
+            <div class="wa-opt-thumb" id="waThumbCreated"></div>
+            <div>
+              <strong>👗 Created Real Dress</strong>
+              <span id="waThumbCreatedLabel">Current live custom design</span>
+            </div>
+          </label>
+          <label class="wa-img-opt" id="optUploadedDress" style="display:none;">
+            <input type="radio" name="waAttachChoice" value="uploaded">
+            <img class="wa-opt-thumb-img" id="waThumbUploaded" src="" alt="Uploaded">
+            <div>
+              <strong>📷 Uploaded Inspiration</strong>
+              <span id="waThumbUploadedName">Your reference photo</span>
+            </div>
+          </label>
+          <label class="wa-img-opt" id="optCustomAttach">
+            <input type="radio" name="waAttachChoice" value="custom">
+            <div class="wa-opt-thumb" id="waThumbCustomIcon">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/></svg>
+            </div>
+            <div>
+              <strong>📎 Pick Another Photo / File</strong>
+              <span id="waCustomAttachLabel">Choose from your phone/PC</span>
+            </div>
+          </label>
+          <input type="file" id="waChatImageInput" accept="image/*" style="display:none;">
         </div>
       </div>
       <div class="wa-input-wrap">
@@ -519,6 +581,90 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   </div>
 </div>
 
+<!-- Ready Dress in Real Cloth Fullscreen Showcase Modal -->
+<div class="modal-overlay" id="readyDressModal">
+  <div class="modal-card" style="max-width:860px;">
+    <div class="modal-head">
+      <div>
+        <h3>🌸 Your Bespoke Dress is Ready in Real Cloth</h3>
+        <p style="margin:2px 0 0; font-size:.82rem; color:var(--muted);">Tailored to your bespoke cuts, comfort ease, and real woven textile texture.</p>
+      </div>
+      <button type="button" id="closeReadyDressBtn" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="ready-dress-grid">
+        <div class="ready-dress-preview" id="readyDressSvgWrap">
+          <!-- Populated dynamically with high-res real cloth SVG -->
+        </div>
+        <div>
+          <div style="display:flex; align-items:baseline; justify-content:space-between; border-bottom:1px solid var(--line); padding-bottom:10px;">
+            <div>
+              <h4 id="readyDressTitle" style="font-family:var(--display); font-size:1.35rem; margin:0; color:var(--fg);"></h4>
+              <p id="readyDressSub" style="margin:4px 0 0; font-size:.86rem; color:var(--muted);"></p>
+            </div>
+            <div id="readyDressPrice" style="font:700 1.6rem var(--display); color:var(--accent);"></div>
+          </div>
+
+          <div class="spec-tag-list" id="readyDressTags">
+            <!-- Dynamic tags -->
+          </div>
+
+          <!-- Macro Fabric Weave Inspection -->
+          <div class="fabric-macro-card">
+            <div class="fabric-macro-lens" id="readyMacroLens"></div>
+            <div class="macro-desc">
+              <strong id="readyMacroTitle">Authentic Woven Fabric Weave</strong>
+              <p id="readyMacroText">Real slub threads with natural breathable texture and fluid twirling draping.</p>
+            </div>
+          </div>
+
+          <div style="margin-top:18px; display:flex; flex-direction:column; gap:10px;">
+            <button class="btn" id="btnSendReadyDressWa" type="button" style="width:100%; font-weight:700;">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+              Send This Real Dress on WhatsApp (with Image)
+            </button>
+            <div style="display:flex; gap:10px;">
+              <button class="btn alt" id="btnDownloadDressImg" type="button" style="flex:1; font-size:.86rem;">
+                📥 Save Dress Photo
+              </button>
+              <button class="btn alt" id="btnAddCartFromModal" type="button" style="flex:1; font-size:.86rem;">
+                🛍️ Add to Bag
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Photo Dispatched Confirmation Modal -->
+<div class="modal-overlay" id="photoNoticeModal">
+  <div class="modal-card" style="max-width:440px;">
+    <div class="modal-head">
+      <h3 style="font-size:1.1rem;">📷 Dress Photo Ready!</h3>
+      <button type="button" id="closePhotoNoticeBtn" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="photo-notice-box">
+        <img id="photoNoticeImg" class="photo-notice-thumb" src="" alt="Dress preview">
+        <p style="margin:0; font-size:.88rem; color:var(--fg); line-height:1.5;">
+          WhatsApp is opening with your inquiry message!
+        </p>
+        <div style="background:var(--accent-soft); border-left:3px solid var(--accent); padding:10px 14px; border-radius:8px; font-size:.82rem; text-align:left; color:var(--fg);">
+          ✨ <b>Photo Sent to Masterji:</b><br>
+          • On phone: Native WhatsApp share attaches the photo automatically.<br>
+          • On computer: Image is downloaded and copied to clipboard — simply press <b>Ctrl + V</b> in WhatsApp Web to paste it!
+        </div>
+        <div style="display:flex; gap:8px; width:100%; margin-top:6px;">
+          <a class="btn" id="btnOpenWaDirectLink" href="#" target="_blank" style="flex:1; font-size:.85rem; padding:9px 12px; text-decoration:none;">Open WhatsApp</a>
+          <button class="btn alt" id="btnDownloadAgain" type="button" style="flex:1; font-size:.85rem; padding:9px 12px;">Download Photo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 (function () {
   'use strict';
@@ -526,7 +672,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
   /* ---------- Settings & Pricing ---------- */
-  var WHATSAPP_NUMBER = '+918383097466'; /* Put your WhatsApp number here (country code + number, digits only) */
+  var WHATSAPP_NUMBER = '919876543210'; /* Put your WhatsApp number here (country code + number, digits only) */
   var ANALYTICS_WEBHOOK_URL = '';       /* Optional: Paste a Google Sheet or Cloudflare Worker webhook URL here */
   var LEAD_TIME = '5 to 7 days';
   var PRICES = {
@@ -681,7 +827,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     vals: {},
     cart: [],
     form: { name: '', phone: '', address: '' },
-    viewMode: 'sketch',
+    viewMode: 'realistic',
     refImage: null,
     refCustomNotes: '',
     chatAttachment: null
@@ -736,42 +882,53 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     var activeWeave = 'weave_' + (c.material || 'cotton') + '_' + uid;
 
     function part(d) {
-      var res = '<path d="' + d + '" fill="' + c.hex + '" stroke="' + col.stroke + '" stroke-width="' + (isReal ? '1.2' : '1.8') + '" stroke-linejoin="round"/>';
+      var strokeC = isReal ? 'rgba(30,12,24,0.22)' : col.stroke;
+      var strokeW = isReal ? '1.0' : '1.8';
+      var res = '<path d="' + d + '" fill="' + c.hex + '" stroke="' + strokeC + '" stroke-width="' + strokeW + '" stroke-linejoin="round"/>';
       if (isReal) {
-        res += '<path d="' + d + '" fill="url(#' + activeWeave + ')" opacity="0.6"/>';
-        res += '<path d="' + d + '" fill="url(#drapeLight_' + uid + ')" opacity="0.4"/>';
+        res += '<path d="' + d + '" fill="url(#' + activeWeave + ')" opacity="0.65"/>';
+        res += '<path d="' + d + '" fill="url(#drapeLight_' + uid + ')" opacity="0.45"/>';
+        if (c.material === 'silk') {
+          res += '<path d="' + d + '" fill="url(#silkLuster_' + uid + ')" opacity="0.32"/>';
+        }
       }
       if (pat) {
-        res += '<path d="' + d + '" fill="url(#' + pat + ')"' + (isReal ? ' opacity="0.9"' : '') + '/>';
+        res += '<path d="' + d + '" fill="url(#' + pat + ')"' + (isReal ? ' opacity="0.88"' : '') + '/>';
       }
       return res;
     }
     function mir(inner) { return '<g transform="matrix(-1 0 0 1 300 0)">' + inner + '</g>'; }
     function pair(d) { return part(d) + mir(part(d)); }
     function line(d, w, strokeCol) { return '<path d="' + d + '" fill="none" stroke="' + (strokeCol || col.stroke) + '" stroke-width="' + (w || 1.4) + '" stroke-linecap="round"/>'; }
-    function goldTrim(d) { return '<path d="' + d + '" fill="none" stroke="' + col.gold + '" stroke-width="2.2" stroke-dasharray="3,2"/>'; }
+    function goldTrim(d) {
+      if (isReal) {
+        return '<path d="' + d + '" fill="none" stroke="#D89835" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="2.5,1.5"/>' +
+          '<path d="' + d + '" fill="none" stroke="#FFF1B8" stroke-width="0.9" opacity="0.8" stroke-dasharray="1.5,2.5"/>';
+      }
+      return '<path d="' + d + '" fill="none" stroke="' + col.gold + '" stroke-width="2.2" stroke-dasharray="3,2"/>';
+    }
 
     // Pattern & Real Fabric Texture Definitions
     var defs = '<defs>' +
       // 1. Realistic Fabric Weaves
       '<pattern id="weave_cotton_' + uid + '" width="8" height="8" patternUnits="userSpaceOnUse">' +
-      '<line x1="0" y1="2" x2="8" y2="2" stroke="rgba(0,0,0,0.12)" stroke-width="0.8"/>' +
-      '<line x1="0" y1="6" x2="8" y2="6" stroke="rgba(255,255,255,0.18)" stroke-width="0.8"/>' +
-      '<line x1="2" y1="0" x2="2" y2="8" stroke="rgba(0,0,0,0.08)" stroke-width="0.7"/>' +
-      '<line x1="6" y1="0" x2="6" y2="8" stroke="rgba(255,255,255,0.15)" stroke-width="0.7"/>' +
+      '<line x1="0" y1="2" x2="8" y2="2" stroke="rgba(0,0,0,0.14)" stroke-width="0.85"/>' +
+      '<line x1="0" y1="6" x2="8" y2="6" stroke="rgba(255,255,255,0.22)" stroke-width="0.85"/>' +
+      '<line x1="2" y1="0" x2="2" y2="8" stroke="rgba(0,0,0,0.1)" stroke-width="0.75"/>' +
+      '<line x1="6" y1="0" x2="6" y2="8" stroke="rgba(255,255,255,0.18)" stroke-width="0.75"/>' +
       '</pattern>' +
       '<pattern id="weave_georgette_' + uid + '" width="6" height="6" patternUnits="userSpaceOnUse">' +
-      '<circle cx="2" cy="2" r="0.9" fill="rgba(0,0,0,0.14)"/>' +
-      '<circle cx="5" cy="5" r="0.9" fill="rgba(255,255,255,0.24)"/>' +
-      '<path d="M0 3 Q3 1 6 3" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>' +
+      '<circle cx="2" cy="2" r="0.9" fill="rgba(0,0,0,0.16)"/>' +
+      '<circle cx="5" cy="5" r="0.9" fill="rgba(255,255,255,0.28)"/>' +
+      '<path d="M0 3 Q3 1 6 3" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.6"/>' +
       '</pattern>' +
       '<pattern id="weave_silk_' + uid + '" width="14" height="14" patternUnits="userSpaceOnUse">' +
-      '<line x1="0" y1="14" x2="14" y2="0" stroke="rgba(255,255,255,0.28)" stroke-width="1.6"/>' +
+      '<line x1="0" y1="14" x2="14" y2="0" stroke="rgba(255,255,255,0.32)" stroke-width="1.8"/>' +
       '<line x1="0" y1="7" x2="7" y2="0" stroke="rgba(0,0,0,0.08)" stroke-width="0.9"/>' +
       '</pattern>' +
       '<pattern id="weave_organza_' + uid + '" width="10" height="10" patternUnits="userSpaceOnUse">' +
-      '<rect width="10" height="10" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>' +
-      '<circle cx="5" cy="5" r="1.5" fill="rgba(255,255,255,0.2)"/>' +
+      '<rect width="10" height="10" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"/>' +
+      '<circle cx="5" cy="5" r="1.5" fill="rgba(255,255,255,0.25)"/>' +
       '</pattern>' +
       // 2. Realistic Studio Light Gradient
       '<linearGradient id="drapeLight_' + uid + '" x1="0%" y1="0%" x2="100%" y2="0%">' +
@@ -780,6 +937,12 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       '<stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.32"/>' +
       '<stop offset="78%" stop-color="#FFFFFF" stop-opacity="0.14"/>' +
       '<stop offset="100%" stop-color="#000000" stop-opacity="0.32"/>' +
+      '</linearGradient>' +
+      '<linearGradient id="silkLuster_' + uid + '" x1="0%" y1="0%" x2="100%" y2="100%">' +
+      '<stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.45"/>' +
+      '<stop offset="40%" stop-color="#FFFFFF" stop-opacity="0"/>' +
+      '<stop offset="70%" stop-color="#FFFFFF" stop-opacity="0.35"/>' +
+      '<stop offset="100%" stop-color="#000000" stop-opacity="0.28"/>' +
       '</linearGradient>' +
       // 3. Dress Patterns
       (c.pattern === 'floral' ?
@@ -1070,6 +1233,17 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     };
   }
 
+  function updateWaChatThumbnail() {
+    var thumbBox = $('#waThumbCreated');
+    if (thumbBox) {
+      thumbBox.innerHTML = buildDress(cfg(), 'waMini');
+    }
+    var lbl = $('#waThumbCreatedLabel');
+    if (lbl) {
+      lbl.textContent = (GNAME[st.g] || st.g) + ' · ' + (st.customHex || FABRICS[st.fabric].n);
+    }
+  }
+
   function drawPreview() {
     var c = cfg();
     $('#pv').innerHTML = buildDress(c, 'pv');
@@ -1096,6 +1270,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       }
     }
 
+    updateWaChatThumbnail();
     if (typeof updateWaContext === 'function') updateWaContext();
   }
 
@@ -1347,10 +1522,33 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     if (bad) {
       e.preventDefault();
       s.textContent = bad;
-    } else {
-      Tracker.log('wa_order_initiated', { items: st.cart.length, total: total() });
-      s.textContent = 'Opening WhatsApp. Press send to submit your order to our atelier!';
+      return;
     }
+    e.preventDefault();
+    Tracker.log('wa_order_initiated', { items: st.cart.length, total: total() });
+    s.textContent = 'Preparing bespoke order with ready dress image...';
+    var t = orderText();
+    var phone = WHATSAPP_NUMBER || '919876543210';
+    var waUrl = 'https://wa.me/' + phone.replace(/\D/g, '') + '?text=' + encodeURIComponent(t);
+
+    exportDressImage(function (blob, dataUrl) {
+      if (navigator.share && navigator.canShare && blob) {
+        var file = new File([blob], 'PehnoApni_Custom_Dress_Order.png', { type: 'image/png' });
+        if (navigator.canShare({ files: [file] })) {
+          navigator.share({
+            title: 'PehnoApni Dress Order',
+            text: t,
+            files: [file]
+          }).then(function () {
+            s.textContent = 'Order sent to atelier on WhatsApp!';
+          }).catch(function () {
+            openWaFallback(waUrl, blob, dataUrl, 'PehnoApni_Custom_Dress_Order.png');
+          });
+          return;
+        }
+      }
+      openWaFallback(waUrl, blob, dataUrl, 'PehnoApni_Custom_Dress_Order.png');
+    });
   });
 
   $('#copyo').addEventListener('click', function () {
@@ -1511,14 +1709,161 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     if (el) el.innerHTML = '👗 <b>Currently Styling:</b> ' + g + ' in ' + c + ' (' + p + ')';
   }
 
-  function sendWaQuery(questionText) {
+  /* ---------- Export Dress to Canvas / Real PNG Image ---------- */
+  function exportDressImage(callback) {
+    try {
+      var c = cfg();
+      c.viewMode = 'realistic';
+      var svgHtml = buildDress(c, 'exportReal');
+      var svgBlob = new Blob([svgHtml], { type: 'image/svg+xml;charset=utf-8' });
+      var url = URL.createObjectURL(svgBlob);
+      var img = new Image();
+      img.onload = function () {
+        var canvas = document.createElement('canvas');
+        canvas.width = 650;
+        canvas.height = 880;
+        var ctx = canvas.getContext('2d');
+
+        // Studio atelier gradient background
+        var bg = ctx.createRadialGradient(325, 400, 50, 325, 440, 480);
+        bg.addColorStop(0, '#FFF5F8');
+        bg.addColorStop(0.7, '#F7ECF2');
+        bg.addColorStop(1, '#ECE0E8');
+        ctx.fillStyle = bg;
+        ctx.fillRect(0, 0, 650, 880);
+
+        // Atelier dashed border frame
+        ctx.strokeStyle = 'rgba(212, 66, 125, 0.25)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([8, 6]);
+        ctx.strokeRect(16, 16, 618, 848);
+        ctx.setLineDash([]);
+
+        // Header Title
+        ctx.fillStyle = '#842044';
+        ctx.font = 'bold 24px "Playfair Display", Georgia, serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('PehnoApni Girls Atelier', 325, 52);
+
+        ctx.fillStyle = '#786470';
+        ctx.font = '500 13px "Plus Jakarta Sans", sans-serif';
+        var gTitle = (GNAME[st.g] || st.g);
+        var colTitle = st.customHex ? ('Extracted Shade ' + st.customHex) : FABRICS[st.fabric].n;
+        var matTitle = lbl(MATERIALS, st.material);
+        ctx.fillText(gTitle + ' · ' + colTitle + ' · ' + matTitle, 325, 74);
+
+        // Draw the Realistic Dress
+        ctx.drawImage(img, 50, 85, 550, 680);
+
+        // Price Pill Banner
+        ctx.fillStyle = '#842044';
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(175, 795, 300, 46, 23);
+        else ctx.rect(175, 795, 300, 46);
+        ctx.fill();
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 16px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('Bespoke Handcrafted: ' + rupee(price()), 325, 824);
+
+        URL.revokeObjectURL(url);
+        canvas.toBlob(function (blob) {
+          callback(blob, canvas.toDataURL('image/png'));
+        }, 'image/png');
+      };
+      img.onerror = function () {
+        callback(null, null);
+      };
+      img.src = url;
+    } catch (e) {
+      console.warn('Canvas export error:', e);
+      callback(null, null);
+    }
+  }
+
+  /* ---------- Ready Dress in Real Cloth Showcase Modal ---------- */
+  function openReadyDressModal() {
+    var c = cfg();
+    c.viewMode = 'realistic';
+    $('#readyDressSvgWrap').innerHTML = buildDress(c, 'readyView');
+    $('#readyDressTitle').textContent = GNAME[st.g] || st.g;
+    var colName = st.customHex ? ('Custom Shade ' + st.customHex) : FABRICS[st.fabric].n;
+    $('#readyDressSub').textContent = colName + ' · ' + lbl(MATERIALS, st.material) + ' · ' + lbl(PATTERNS, st.pattern);
+    $('#readyDressPrice').textContent = rupee(price());
+
+    var o = st.opts[st.g];
+    var tags = [
+      'Fit: <b>' + lbl(FITS, st.fit) + '</b>',
+      'Neckline: <b>' + lbl(OPTS[st.g][0] ? OPTS[st.g][0].ch : [], o.neck) + '</b>',
+      'Sleeves: <b>' + lbl(OPTS[st.g][1] ? OPTS[st.g][1].ch : [], o.sleeve) + '</b>'
+    ];
+    if (o.length) tags.push('Length: <b>' + lbl(OPTS[st.g][2] ? OPTS[st.g][2].ch : [], o.length) + '</b>');
+    if (o.pocket === 'yes') tags.push('Pocket: <b>Hidden Side Pocket</b>');
+    if (o.waistDetail && o.waistDetail !== 'none') tags.push('Detail: <b>' + lbl(OPTS[st.g][3] ? OPTS[st.g][3].ch : [], o.waistDetail) + '</b>');
+    $('#readyDressTags').innerHTML = tags.map(function (t) { return '<span class="spec-tag">' + t + '</span>'; }).join('');
+
+    // Macro Fabric Swatch
+    var macroLens = $('#readyMacroLens');
+    var macroTitle = $('#readyMacroTitle');
+    var macroText = $('#readyMacroText');
+    var curCol = st.customHex || FABRICS[st.fabric].h;
+    var macroInfo = {
+      cotton: ['100% Mulmul Cotton Slub Weave', 'Woven organic cross-threads with natural matte slub texture. Ultra-breathable, soft on skin, and graceful twirl folds.', 'weave_cotton_readyView'],
+      georgette: ['Premium Flowy Georgette Crepe', 'Micro-pebbled grain weave with airy sheer translucency and fluid ripple movement for twirling.', 'weave_georgette_readyView'],
+      silk: ['Mulberry Silk Satin Sheen', 'Dense satin twill with radiant specular luster highlights and structured flare draping.', 'weave_silk_readyView'],
+      organza: ['Crisp Sheer Shimmer Organza', 'Diaphanous glass weave structure with crisp sculpted volume and light-catching shimmer.', 'weave_organza_readyView']
+    };
+    var m = macroInfo[st.material] || macroInfo.cotton;
+    macroTitle.textContent = m[0];
+    macroText.textContent = m[1];
+    macroLens.style.background = curCol;
+    macroLens.innerHTML = '<svg width="54" height="54"><rect width="54" height="54" fill="' + curCol + '"/><rect width="54" height="54" fill="url(#' + m[2] + ')" opacity="0.9"/></svg>';
+
+    $('#readyDressModal').classList.add('open');
+    Tracker.log('view_ready_dress', { garment: GNAME[st.g], price: price() });
+  }
+
+  function openWaFallback(waUrl, blob, dataUrl, filename) {
+    if (blob) {
+      try {
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = filename || 'PehnoApni_Custom_Dress.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } catch (e) {}
+
+      if (navigator.clipboard && window.ClipboardItem) {
+        try {
+          navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]).catch(function () {});
+        } catch (e) {}
+      }
+    }
+
+    window.open(waUrl, '_blank');
+    $('#waPopup').classList.remove('open');
+    if ($('#readyDressModal')) $('#readyDressModal').classList.remove('open');
+
+    var noticeModal = $('#photoNoticeModal');
+    if (noticeModal) {
+      $('#photoNoticeImg').src = dataUrl || '';
+      $('#btnOpenWaDirectLink').href = waUrl;
+      noticeModal.classList.add('open');
+    }
+  }
+
+  function dispatchWhatsAppQuery(questionText) {
     var q = (questionText || ($('#waCustomMsg') ? $('#waCustomMsg').value.trim() : '')).trim();
     if (!q) q = 'Hi, I need styling & sizing guidance for this dress!';
     var g = GNAME[st.g] || st.g;
     var c = st.customHex ? ('Extracted Shade (' + st.customHex + ')') : (FABRICS[st.fabric] ? FABRICS[st.fabric].n : '');
     var pr = rupee(price());
     var o = st.opts[st.g];
-    var optsStr = OPTS[st.g] ? OPTS[st.g].map(function(d) { return d.label + ': ' + lbl(d.ch, o[d.k]); }).join(', ') : '';
+    var optsStr = OPTS[st.g] ? OPTS[st.g].map(function (d) { return d.label + ': ' + lbl(d.ch, o[d.k]); }).join(', ') : '';
+
+    var attachChoiceEl = $('input[name="waAttachChoice"]:checked');
+    var attachChoice = attachChoiceEl ? attachChoiceEl.value : 'created';
 
     var msgParts = [
       '🌸 *Customer Query - PehnoApni Girls Atelier*',
@@ -1529,30 +1874,77 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       '• Color & Fabric: ' + c + ' (' + lbl(MATERIALS, st.material) + ')',
       '• Styling Options: ' + optsStr,
       '• Fit: ' + lbl(FITS, st.fit),
-      '• View Mode: ' + (st.viewMode === 'realistic' ? 'Real Cloth Drape' : 'Fashion Sketch'),
+      '• View Mode: Real Cloth Drape',
       '• Estimated Price: ' + pr
     ];
 
-    if (st.refImage) {
-      msgParts.push('', '📷 *Inspiration Photo Uploaded in Studio:* ' + (st.refImage.name || 'Yes'));
-      if (st.customHex) msgParts.push('• Custom Color Extracted: ' + st.customHex);
-      if (st.refCustomNotes) msgParts.push('• Customer Notes on Photo: ' + st.refCustomNotes);
+    if (attachChoice === 'uploaded' && st.refImage) {
+      msgParts.push('', '📷 *Attached: Customer Inspiration Dress Photo* (' + (st.refImage.name || 'Reference') + ')');
+      if (st.refCustomNotes) msgParts.push('• Notes on Photo: ' + st.refCustomNotes);
+    } else if (attachChoice === 'custom' && st.chatAttachment) {
+      msgParts.push('', '📎 *Attached: Customer Reference Photo* (' + st.chatAttachment.name + ')');
+    } else {
+      msgParts.push('', '👗 *Attached: Live Created Real Dress Photo*');
+      if (st.refImage && st.refCustomNotes) {
+        msgParts.push('• Inspiration Notes: ' + st.refCustomNotes);
+      }
     }
 
-    if (st.chatAttachment) {
-      msgParts.push('', '📎 *Customer Attached Photo for Stylist:* ' + st.chatAttachment.name);
-      msgParts.push('*(Note to Masterji: I am sending this photo directly in this chat!)*');
-    }
-
-    msgParts.push('', 'Please reply with guidance and fabric details!');
+    msgParts.push('', '*(I am sending the dress photo directly with this message!)*');
+    msgParts.push('Please reply with guidance and fabric details!');
     var msg = msgParts.join('\n');
 
-    Tracker.log('wa_query', { question: q, garment: g, color: c, price: price(), hasAttachment: !!st.chatAttachment });
+    Tracker.log('wa_query', { question: q, garment: g, color: c, price: price(), attachChoice: attachChoice });
 
-    var phone = WHATSAPP_NUMBER || prompt('Enter your WhatsApp phone number to send query (e.g. 9002215440):', '+918383097466');
-    if (phone) {
-      window.open('https://wa.me/' + phone.replace(/\D/g, '') + '?text=' + encodeURIComponent(msg), '_blank');
+    var phone = WHATSAPP_NUMBER || '919876543210';
+    var waUrl = 'https://wa.me/' + phone.replace(/\D/g, '') + '?text=' + encodeURIComponent(msg);
+
+    function handleDispatch(imgBlob, dataUrl, filename) {
+      if (navigator.share && navigator.canShare && imgBlob) {
+        var file = new File([imgBlob], filename || 'PehnoApni_Dress.png', { type: 'image/png' });
+        if (navigator.canShare({ files: [file] })) {
+          navigator.share({
+            title: 'PehnoApni Custom Dress Query',
+            text: msg,
+            files: [file]
+          }).then(function () {
+            $('#waPopup').classList.remove('open');
+          }).catch(function () {
+            openWaFallback(waUrl, imgBlob, dataUrl, filename);
+          });
+          return;
+        }
+      }
+      openWaFallback(waUrl, imgBlob, dataUrl, filename);
     }
+
+    if (attachChoice === 'uploaded' && st.refImage && st.refImage.dataUrl) {
+      fetch(st.refImage.dataUrl)
+        .then(function (res) { return res.blob(); })
+        .then(function (blob) {
+          handleDispatch(blob, st.refImage.dataUrl, 'Uploaded_Inspiration_' + (st.refImage.name || 'dress.png'));
+        })
+        .catch(function () {
+          exportDressImage(function (b, d) { handleDispatch(b, d, 'PehnoApni_Created_Dress.png'); });
+        });
+    } else if (attachChoice === 'custom' && st.chatAttachment && st.chatAttachment.dataUrl) {
+      fetch(st.chatAttachment.dataUrl)
+        .then(function (res) { return res.blob(); })
+        .then(function (blob) {
+          handleDispatch(blob, st.chatAttachment.dataUrl, st.chatAttachment.name || 'Attached_Photo.png');
+        })
+        .catch(function () {
+          exportDressImage(function (b, d) { handleDispatch(b, d, 'PehnoApni_Created_Dress.png'); });
+        });
+    } else {
+      exportDressImage(function (blob, dataUrl) {
+        handleDispatch(blob, dataUrl, 'PehnoApni_Created_Dress.png');
+      });
+    }
+  }
+
+  function sendWaQuery(questionText) {
+    dispatchWhatsAppQuery(questionText);
   }
 
   function renderAnalyticsModal() {
@@ -1774,6 +2166,22 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
       if (nameEl) nameEl.textContent = file.name || 'Inspiration Photo';
       if (card) card.style.display = 'block';
 
+      // Update WhatsApp Query Image Picker Option
+      var upOpt = $('#optUploadedDress');
+      var upThumb = $('#waThumbUploaded');
+      var upName = $('#waThumbUploadedName');
+      if (upThumb) upThumb.src = dataUrl;
+      if (upName) upName.textContent = file.name || 'Uploaded Reference';
+      if (upOpt) {
+        upOpt.style.display = 'flex';
+        var upRadio = $('input[name="waAttachChoice"][value="uploaded"]');
+        if (upRadio) {
+          upRadio.checked = true;
+          $$('.wa-img-opt').forEach(function(o) { o.classList.remove('selected'); });
+          upOpt.classList.add('selected');
+        }
+      }
+
       st.viewMode = 'realistic';
       $('#tabRealistic').classList.add('active');
       $('#tabSketch').classList.remove('active');
@@ -1818,6 +2226,18 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     $('#fabName').textContent = FABRICS[st.fabric].n;
     var defRadio = $('#fb-' + st.fabric);
     if (defRadio) defRadio.checked = true;
+
+    // Reset WhatsApp Query image picker option
+    var upOpt = $('#optUploadedDress');
+    if (upOpt) upOpt.style.display = 'none';
+    var createdRadio = $('input[name="waAttachChoice"][value="created"]');
+    if (createdRadio) {
+      createdRadio.checked = true;
+      $$('.wa-img-opt').forEach(function(o) { o.classList.remove('selected'); });
+      var optCreated = $('#optCreatedDress');
+      if (optCreated) optCreated.classList.add('selected');
+    }
+
     drawPreview();
     save();
   });
@@ -1829,7 +2249,76 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     });
   }
 
-  /* ---------- Chat Image Attachment in WhatsApp Popup ---------- */
+  /* ---------- Ready Dress in Real Cloth Showcase Actions ---------- */
+  $('#btnShowReadyDress').addEventListener('click', openReadyDressModal);
+  $('#closeReadyDressBtn').addEventListener('click', function() {
+    $('#readyDressModal').classList.remove('open');
+  });
+  $('#readyDressModal').addEventListener('click', function(e) {
+    if (e.target === $('#readyDressModal')) $('#readyDressModal').classList.remove('open');
+  });
+
+  $('#btnSendReadyDressWa').addEventListener('click', function() {
+    dispatchWhatsAppQuery('Hi Masterji, I finalized my bespoke dress in real cloth! Here is the photo and my specifications.');
+  });
+
+  $('#btnDownloadDressImg').addEventListener('click', function() {
+    exportDressImage(function(blob, dataUrl) {
+      if (blob) {
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'PehnoApni_Ready_Dress.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    });
+  });
+
+  $('#btnAddCartFromModal').addEventListener('click', function() {
+    addToCart();
+    $('#readyDressModal').classList.remove('open');
+  });
+
+  /* ---------- Photo Dispatched Notice Modal Actions ---------- */
+  $('#closePhotoNoticeBtn').addEventListener('click', function() {
+    $('#photoNoticeModal').classList.remove('open');
+  });
+  $('#photoNoticeModal').addEventListener('click', function(e) {
+    if (e.target === $('#photoNoticeModal')) $('#photoNoticeModal').classList.remove('open');
+  });
+
+  $('#btnDownloadAgain').addEventListener('click', function() {
+    exportDressImage(function(blob) {
+      if (blob) {
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'PehnoApni_Custom_Dress.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    });
+  });
+
+  /* ---------- WhatsApp Image Attachment Choice Listeners ---------- */
+  $$('input[name="waAttachChoice"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      $$('.wa-img-opt').forEach(function(opt) { opt.classList.remove('selected'); });
+      var parent = radio.closest('.wa-img-opt');
+      if (parent) parent.classList.add('selected');
+      if (radio.value === 'custom' && !st.chatAttachment) {
+        $('#waChatImageInput').click();
+      }
+    });
+  });
+
+  $('#optCustomAttach').addEventListener('click', function(e) {
+    if (e.target.tagName !== 'INPUT') {
+      $('#waChatImageInput').click();
+    }
+  });
+
   $('#waChatImageInput').addEventListener('change', function(e) {
     var file = e.target.files && e.target.files[0];
     if (!file) return;
@@ -1837,17 +2326,16 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     reader.onload = function(evt) {
       var dataUrl = evt.target.result;
       st.chatAttachment = { name: file.name, dataUrl: dataUrl };
-      $('#waThumbImg').src = dataUrl;
-      $('#waAttachedPreview').style.display = 'inline-flex';
+      var lbl = $('#waCustomAttachLabel');
+      if (lbl) lbl.textContent = file.name;
+      var customRadio = $('input[name="waAttachChoice"][value="custom"]');
+      if (customRadio) {
+        customRadio.checked = true;
+        $$('.wa-img-opt').forEach(function(opt) { opt.classList.remove('selected'); });
+        $('#optCustomAttach').classList.add('selected');
+      }
     };
     reader.readAsDataURL(file);
-  });
-
-  $('#removeWaAttachBtn').addEventListener('click', function() {
-    st.chatAttachment = null;
-    $('#waChatImageInput').value = '';
-    $('#waAttachedPreview').style.display = 'none';
-    $('#waThumbImg').src = '';
   });
 
   /* ---------- Storage & Init ---------- */
