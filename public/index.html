@@ -672,7 +672,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
   /* ---------- Settings & Pricing ---------- */
-  var WHATSAPP_NUMBER = '919876543210'; /* Put your WhatsApp number here (country code + number, digits only) */
+  var WHATSAPP_NUMBER = '+918383097466'; /* Put your WhatsApp number here (country code + number, digits only) */
   var ANALYTICS_WEBHOOK_URL = '';       /* Optional: Paste a Google Sheet or Cloudflare Worker webhook URL here */
   var LEAD_TIME = '5 to 7 days';
   var PRICES = {
@@ -1528,7 +1528,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
     Tracker.log('wa_order_initiated', { items: st.cart.length, total: total() });
     s.textContent = 'Preparing bespoke order with ready dress image...';
     var t = orderText();
-    var phone = WHATSAPP_NUMBER || '919876543210';
+    var phone = WHATSAPP_NUMBER || '+918383097466';
     var waUrl = 'https://wa.me/' + phone.replace(/\D/g, '') + '?text=' + encodeURIComponent(t);
 
     exportDressImage(function (blob, dataUrl) {
@@ -1896,7 +1896,7 @@ footer { padding-block: 60px 45px; color: var(--muted); font-size: .92rem; text-
 
     Tracker.log('wa_query', { question: q, garment: g, color: c, price: price(), attachChoice: attachChoice });
 
-    var phone = WHATSAPP_NUMBER || '919876543210';
+    var phone = WHATSAPP_NUMBER || '+918383097466';
     var waUrl = 'https://wa.me/' + phone.replace(/\D/g, '') + '?text=' + encodeURIComponent(msg);
 
     function handleDispatch(imgBlob, dataUrl, filename) {
